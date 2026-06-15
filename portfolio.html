@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elifnur Tabala — Project Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+
+  :root {
+    --bg:       #0a0a0f;
+    --bg2:      #0f0f1a;
+    --panel:    #12121f;
+    --border:   #2a2a4a;
+    --accent:   #00ff88;
+    --accent2:  #ff6b6b;
+    --accent3:  #6b8aff;
+    --accent4:  #ffd700;
+    --text:     #e0e0ff;
+    --muted:    #7070a0;
+    --pixel:    'Press Start 2P', monospace;
+    --mono:     'Share Tech Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* SCANLINES OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(10,10,15,0.95);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-logo {
+    font-family: var(--pixel);
+    font-size: 10px;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent);
+  }
+
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-family: var(--pixel);
+    font-size: 7px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 40px 60px;
+    position: relative;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridMove 20s linear infinite;
+  }
+  @keyframes gridMove {
+    from { background-position: 0 0; }
+    to   { background-position: 40px 40px; }
+  }
+
+  .hero-eyebrow {
+    font-family: var(--pixel);
+    font-size: 8px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  .hero-title {
+    font-family: var(--pixel);
+    font-size: clamp(18px, 4vw, 36px);
+    color: #fff;
+    text-shadow: 0 0 30px rgba(0,255,136,0.4), 0 0 60px rgba(0,255,136,0.15);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.4s;
+    line-height: 1.6;
+  }
+
+  .hero-title span { color: var(--accent); }
+
+  .hero-sub {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 16px auto 36px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.6s;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.8s;
+    margin-bottom: 40px;
+  }
+
+  .badge {
+    font-family: var(--pixel);
+    font-size: 7px;
+    padding: 6px 12px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  .badge.red   { border-color: var(--accent2); color: var(--accent2); }
+  .badge.blue  { border-color: var(--accent3); color: var(--accent3); }
+  .badge.gold  { border-color: var(--accent4); color: var(--accent4); }
+
+  .score-bar {
+    font-family: var(--pixel);
+    font-size: 9px;
+    color: var(--accent4);
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 1s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .section-label {
+    font-family: var(--pixel);
+    font-size: 8px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: var(--pixel);
+    font-size: clamp(14px, 2.5vw, 22px);
+    color: #fff;
+    margin-bottom: 48px;
+    line-height: 1.6;
+  }
+
+  .section-title span { color: var(--accent); }
+
+  /* PROJECTS GRID */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 24px;
+  }
+
+  .project-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 28px;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--card-accent, var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .project-card:hover {
+    border-color: var(--card-accent, var(--accent));
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .card-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .card-title-group { flex: 1; }
+
+  .card-level {
+    font-family: var(--pixel);
+    font-size: 6px;
+    color: var(--card-accent, var(--accent));
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .card-title {
+    font-family: var(--pixel);
+    font-size: 10px;
+    color: #fff;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .card-role {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .card-desc {
+    font-size: 12px;
+    color: #a0a0c0;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  /* TECH DETAILS — collapsible */
+  .tech-toggle {
+    font-family: var(--pixel);
+    font-size: 7px;
+    color: var(--card-accent, var(--accent));
+    cursor: pointer;
+    letter-spacing: 1px;
+    background: none;
+    border: 1px solid var(--card-accent, var(--accent));
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    display: inline-block;
+    transition: background 0.2s, color 0.2s;
+    user-select: none;
+  }
+  .tech-toggle:hover {
+    background: var(--card-accent, var(--accent));
+    color: #000;
+  }
+
+  .tech-details {
+    display: none;
+    margin-bottom: 16px;
+  }
+
+  .tech-details.open { display: block; }
+
+  .tech-detail-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 11px;
+    align-items: flex-start;
+  }
+
+  .detail-key {
+    font-family: var(--pixel);
+    font-size: 6px;
+    color: var(--card-accent, var(--accent));
+    min-width: 90px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .detail-val { color: #a0a0c0; line-height: 1.5; }
+
+  /* STACK TAGS */
+  .stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .tag {
+    font-family: var(--pixel);
+    font-size: 6px;
+    padding: 4px 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* CARD LINKS */
+  .card-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .card-link {
+    font-family: var(--pixel);
+    font-size: 7px;
+    padding: 7px 14px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .card-link.primary {
+    border-color: var(--card-accent, var(--accent));
+    color: var(--card-accent, var(--accent));
+  }
+
+  .card-link:hover {
+    background: var(--card-accent, var(--accent));
+    color: #000;
+    border-color: var(--card-accent, var(--accent));
+  }
+
+  .card-link.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  /* KTR BADGE */
+  .ktr-badge {
+    display: inline-block;
+    font-family: var(--pixel);
+    font-size: 7px;
+    padding: 5px 10px;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid var(--accent4);
+    color: var(--accent4);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* DIVIDER */
+  .pixel-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .skill-block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 22px;
+    transition: border-color 0.3s;
+  }
+
+  .skill-block:hover { border-color: var(--accent3); }
+
+  .skill-block-title {
+    font-family: var(--pixel);
+    font-size: 8px;
+    color: var(--accent3);
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .skill-name { font-size: 12px; color: var(--text); min-width: 130px; }
+
+  .skill-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--accent3);
+    width: 0;
+    transition: width 1s ease;
+  }
+
+  .skill-block:hover .skill-fill { width: var(--w); }
+
+  /* STATS */
+  .stats-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+
+  .stat-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 20px 28px;
+    text-align: center;
+    flex: 1;
+    min-width: 140px;
+    transition: border-color 0.3s;
+  }
+
+  .stat-box:hover { border-color: var(--accent4); }
+
+  .stat-val {
+    font-family: var(--pixel);
+    font-size: 18px;
+    color: var(--accent4);
+    display: block;
+    margin-bottom: 8px;
+    text-shadow: 0 0 12px rgba(255,215,0,0.4);
+  }
+
+  .stat-label {
+    font-family: var(--pixel);
+    font-size: 6px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    text-align: center;
+    padding: 80px 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+
+  .contact-link {
+    font-family: var(--pixel);
+    font-size: 8px;
+    padding: 12px 24px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 1px;
+    transition: all 0.25s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 20px rgba(0,255,136,0.2);
+  }
+
+  /* BLINK CURSOR */
+  .blink { animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 30px;
+    font-family: var(--pixel);
+    font-size: 7px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: 1px;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 12px 20px; }
+    .nav-links { gap: 14px; }
+    section { padding: 60px 20px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ELIF.EXE<span class="blink">_</span></div>
+  <div class="nav-links">
+    <a href="#projects">PROJECTS</a>
+    <a href="#skills">SKILLS</a>
+    <a href="#contact">CONTACT</a>
+    <a href="https://elifnurtabala.dev" target="_blank">← MAIN SITE</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">// PROJECT PORTFOLIO</div>
+  <h1 class="hero-title">ELIFNUR <span>TABALA</span></h1>
+  <p class="hero-sub">Full technical deep-dive: every project, every stack decision, every GitHub link. No fluff.</p>
+  <div class="hero-badges">
+    <span class="badge">ROS2 ✓</span>
+    <span class="badge gold">KTR 87/100 ★</span>
+    <span class="badge red">TEKNOFEST</span>
+    <span class="badge blue">SPRING BOOT</span>
+    <span class="badge">C / SYSTEMS</span>
+    <span class="badge red">CLAUDE API</span>
+    <span class="badge blue">GPA 3.32</span>
+  </div>
+  <div class="score-bar">▶ PROJECTS LOADED: 5 &nbsp;·&nbsp; COMMITS: MANY &nbsp;·&nbsp; BUGS FIXED: MORE</div>
+</div>
+
+<hr class="pixel-divider">
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-row reveal">
+    <div class="stat-box">
+      <span class="stat-val">87</span>
+      <span class="stat-label">KTR SCORE / 100</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">3.32</span>
+      <span class="stat-label">GPA / 4.00</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">679</span>
+      <span class="stat-label">TESTS PASSING</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">10+</span>
+      <span class="stat-label">GAZEBO SCENARIOS</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">4</span>
+      <span class="stat-label">LANGUAGES CODED</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">// COMPLETED LEVELS</div>
+  <h2 class="section-title">PROJECT<span>_</span>ARCHIVE</h2>
+
+  <div class="projects-grid">
+
+    <!-- SAHI OTONOM -->
+    <div class="project-card reveal" style="--card-accent: #ffd700;">
+      <div class="ktr-badge">★ TEKNOFEST KTR: 87/100</div>
+      <div class="card-header">
+        <div class="card-icon">🚗</div>
+        <div class="card-title-group">
+          <div class="card-level">LEVEL 05 — FLAGSHIP PROJECT</div>
+          <div class="card-title">SAHI OTONOM<br>ROBOTAKSI</div>
+          <div class="card-role">Software Developer · Autonomous Systems · 2025–Present</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Autonomous vehicle system competing at Teknofest Robotaksi — Turkey's premier autonomous driving competition.
+        Full perception, navigation, and control stack on real hardware. KTR (technical report) scored 87/100.
+      </p>
+      <button class="tech-toggle" onclick="toggleDetails(this)">▶ TECH DETAILS</button>
+      <div class="tech-details">
+        <div class="tech-detail-item">
+          <span class="detail-key">PERCEPTION</span>
+          <span class="detail-val">LiDAR + ZED 2i stereo camera sensor fusion pipeline in ROS2 Humble; real-time depth estimation and obstacle detection</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">LANE DETECT</span>
+          <span class="detail-val">YOLOPv2-based lane detection integrated with OpenCV; output fed as ROS2 topic to decision node</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">NAVIGATION</span>
+          <span class="detail-val">A* path planning algorithm; PID control loop for steering, braking, propulsion</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">SIMULATION</span>
+          <span class="detail-val">10+ autonomous driving test scenarios in Gazebo before hardware deployment; caught critical pipeline errors pre-integration</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">HARDWARE</span>
+          <span class="detail-val">STM32F4 MCUs over I2C (400kHz) for steering, braking, propulsion; Ubuntu 22.04, ROS2 Humble</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">TEAM</span>
+          <span class="detail-val">4-engineer robotics software team; collaborative ROS2 node development and integration</span>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">ROS2 HUMBLE</span><span class="tag">PYTHON</span><span class="tag">OPENCV</span>
+        <span class="tag">YOLOPV2</span><span class="tag">LIDAR</span><span class="tag">ZED SDK</span>
+        <span class="tag">GAZEBO</span><span class="tag">A*</span><span class="tag">PID</span>
+        <span class="tag">STM32F4</span><span class="tag">I2C</span><span class="tag">UBUNTU 22.04</span>
+      </div>
+      <div class="card-links">
+        <a class="card-link primary" href="https://github.com/eliftb" target="_blank">⌥ GITHUB (PRIVATE)</a>
+        <a class="card-link" href="https://teknofest.org" target="_blank">↗ TEKNOFEST</a>
+      </div>
+    </div>
+
+    <!-- DRAPE -->
+    <div class="project-card reveal" style="--card-accent: #ff6b6b;">
+      <div class="card-header">
+        <div class="card-icon">👗</div>
+        <div class="card-title-group">
+          <div class="card-level">LEVEL 04 — AI VISION</div>
+          <div class="card-title">DRAPE<br>AI OUTFIT STUDIO</div>
+          <div class="card-role">Full-Stack Developer · AI/CV · Solo Project</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Real-time virtual try-on system using computer vision and AI. Upload a garment — Claude Vision analyzes it,
+        MediaPipe overlays it on your live camera feed, emotion detection tells you if you actually like it.
+      </p>
+      <button class="tech-toggle" onclick="toggleDetails(this)">▶ TECH DETAILS</button>
+      <div class="tech-details">
+        <div class="tech-detail-item">
+          <span class="detail-key">CV PIPELINE</span>
+          <span class="detail-val">MediaPipe pose estimation + body segmentation to overlay garments on live video feed in real time</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">AI LAYER</span>
+          <span class="detail-val">Claude Vision API for intelligent garment image processing and analysis; remove.bg for background removal</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">EMOTION</span>
+          <span class="detail-val">face-api.js facial emotion detection to score user satisfaction with outfit; drives recommendation engine</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">BACKEND</span>
+          <span class="detail-val">Node.js orchestration layer managing AI/ML pipelines across Claude Vision, MediaPipe, and remove.bg APIs</span>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">NODE.JS</span><span class="tag">CLAUDE VISION API</span>
+        <span class="tag">MEDIAPIPE</span><span class="tag">FACE-API.JS</span>
+        <span class="tag">JAVASCRIPT</span><span class="tag">REMOVE.BG API</span><span class="tag">AR</span>
+      </div>
+      <div class="card-links">
+        <a class="card-link primary" href="https://github.com/eliftb/drape" target="_blank">⌥ GITHUB</a>
+      </div>
+    </div>
+
+    <!-- HASAD -->
+    <div class="project-card reveal" style="--card-accent: #6b8aff;">
+      <div class="card-header">
+        <div class="card-icon">🛒</div>
+        <div class="card-title-group">
+          <div class="card-level">LEVEL 03 — BACKEND</div>
+          <div class="card-title">HASAD<br>DIGITAL MARKETPLACE</div>
+          <div class="card-role">Backend Developer · Java · Spring Boot</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Production-grade multi-vendor marketplace backend for local producers. Full auth, role management,
+        cart, orders, reviews — 679 tests passing, deployed with Docker.
+      </p>
+      <button class="tech-toggle" onclick="toggleDetails(this)">▶ TECH DETAILS</button>
+      <div class="tech-details">
+        <div class="tech-detail-item">
+          <span class="detail-key">AUTH</span>
+          <span class="detail-val">JWT-based authentication; role-based authorization across 4 roles (SUPER_ADMIN, ADMIN, PRODUCER, CONSUMER)</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">DATABASE</span>
+          <span class="detail-val">PostgreSQL with normalized multi-tenant schema; Flyway migrations (V1–V5); multi-tenant data isolation</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">API</span>
+          <span class="detail-val">RESTful API with Spring Boot 3.2; full admin panel (8+ pages), cart with live badge, address CRUD, review system</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">TESTING</span>
+          <span class="detail-val">679-line test suite passing; fixed critical LOWER() bytea bug via Java stream filtering</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">INFRA</span>
+          <span class="detail-val">Dockerized deployment; Spring Security; port 8080 /api</span>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">JAVA 17</span><span class="tag">SPRING BOOT 3.2</span>
+        <span class="tag">POSTGRESQL</span><span class="tag">JWT</span>
+        <span class="tag">FLYWAY</span><span class="tag">DOCKER</span>
+        <span class="tag">SPRING SECURITY</span><span class="tag">REST API</span>
+      </div>
+      <div class="card-links">
+        <a class="card-link primary" href="https://github.com/eliftb/digital-marketplace-hasad" target="_blank">⌥ GITHUB</a>
+      </div>
+    </div>
+
+    <!-- PAGE REPLACEMENT -->
+    <div class="project-card reveal" style="--card-accent: #00ff88;">
+      <div class="card-header">
+        <div class="card-icon">🖥️</div>
+        <div class="card-title-group">
+          <div class="card-level">LEVEL 02 — SYSTEMS PROGRAMMING</div>
+          <div class="card-title">PAGE REPLACEMENT<br>SIMULATOR</div>
+          <div class="card-role">Systems Programmer · C · OS Internals</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Low-level memory management simulation in C. Implemented FIFO, LRU, and Optimal from scratch,
+        benchmarked across configurable frame sizes, measured real page fault deltas.
+      </p>
+      <button class="tech-toggle" onclick="toggleDetails(this)">▶ TECH DETAILS</button>
+      <div class="tech-details">
+        <div class="tech-detail-item">
+          <span class="detail-key">ALGORITHMS</span>
+          <span class="detail-val">FIFO, LRU, and Optimal page replacement — implemented from scratch in C with no library dependencies</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">BENCHMARKS</span>
+          <span class="detail-val">Compared page fault rates across 3 configurable frame sizes; Optimal ~30% fewer faults vs FIFO (verify against output)</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">ENGINE</span>
+          <span class="detail-val">Simulation engine with configurable frame count for OS memory management analysis across access patterns</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">WHY IT MATTERS</span>
+          <span class="detail-val">Demonstrates real OS internals knowledge — not a framework tutorial. Same memory management principles used in embedded/RTOS systems</span>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">C</span><span class="tag">SYSTEMS PROGRAMMING</span>
+        <span class="tag">OS INTERNALS</span><span class="tag">MEMORY MANAGEMENT</span>
+      </div>
+      <div class="card-links">
+        <a class="card-link primary" href="https://github.com/eliftb/page-replacement-algorithms" target="_blank">⌥ GITHUB</a>
+      </div>
+    </div>
+
+    <!-- RESTAURANT SITE -->
+    <div class="project-card reveal" style="--card-accent: #ff9f43;">
+      <div class="card-header">
+        <div class="card-icon">🍽️</div>
+        <div class="card-title-group">
+          <div class="card-level">LEVEL 01 — SHIPPED TO PRODUCTION</div>
+          <div class="card-title">ŞANLIURFA KEBAP<br>RESTAURANT SITE</div>
+          <div class="card-role">Full-Stack Developer · Frontend · Deployed</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Designed and deployed a production website for a real local restaurant. Responsive UI,
+        menu management, live in production. Real users, real traffic.
+      </p>
+      <button class="tech-toggle" onclick="toggleDetails(this)">▶ TECH DETAILS</button>
+      <div class="tech-details">
+        <div class="tech-detail-item">
+          <span class="detail-key">STACK</span>
+          <span class="detail-val">HTML, CSS, JavaScript — zero framework dependencies, hand-crafted responsive layout</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="detail-key">STATUS</span>
+          <span class="detail-val">Live at sanliurfakebap.com — real production deployment, real users</span>
+        </div>
+      </div>
+      <div class="stack-tags">
+        <span class="tag">HTML</span><span class="tag">CSS</span>
+        <span class="tag">JAVASCRIPT</span><span class="tag">DEPLOYED ✓</span>
+      </div>
+      <div class="card-links">
+        <a class="card-link primary" href="https://sanliurfakebap.com" target="_blank">↗ LIVE SITE</a>
+        <a class="card-link" href="https://github.com/eliftb/kebab-website" target="_blank">⌥ GITHUB</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="pixel-divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// SKILL TREE</div>
+  <h2 class="section-title">TECH<span>_</span>STACK</h2>
+
+  <div class="skills-grid">
+    <div class="skill-block reveal">
+      <div class="skill-block-title">LANGUAGES</div>
+      <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">C</span><div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">C++</span><div class="skill-bar"><div class="skill-fill" style="--w:55%"></div></div></div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-title">ROBOTICS & VISION</div>
+      <div class="skill-item"><span class="skill-name">ROS2 Humble</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">OpenCV</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">LiDAR / ZED SDK</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Gazebo</span><div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Sensor Fusion</span><div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div></div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-title">BACKEND</div>
+      <div class="skill-item"><span class="skill-name">Spring Boot 3.2</span><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">PostgreSQL</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Node.js</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Docker</span><div class="skill-bar"><div class="skill-fill" style="--w:65%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">REST API / JWT</span><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div></div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-title">EMBEDDED & CONTROL</div>
+      <div class="skill-item"><span class="skill-name">I2C / UART / SPI</span><div class="skill-bar"><div class="skill-fill" style="--w:65%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">STM32F4</span><div class="skill-bar"><div class="skill-fill" style="--w:60%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">PID Control</span><div class="skill-bar"><div class="skill-fill" style="--w:65%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">A* Path Planning</span><div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Linux (Ubuntu)</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="pixel-divider">
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="section-label" style="text-align:center">// INSERT COIN TO CONTINUE</div>
+  <h2 class="section-title" style="text-align:center; margin-bottom:8px">LET'S <span>BUILD</span></h2>
+  <p style="color:var(--muted); font-size:12px; max-width:500px; margin:0 auto;">
+    Open for internships, collabs, and anything sufficiently interesting.<br>
+    Response time: faster than a ROS2 topic callback.
+  </p>
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:eliftabala63@gmail.com">✉ EMAIL</a>
+    <a class="contact-link" href="https://github.com/eliftb" target="_blank">⌥ GITHUB</a>
+    <a class="contact-link" href="https://linkedin.com/in/elifnur-tabala" target="_blank">↗ LINKEDIN</a>
+    <a class="contact-link" href="https://elifnurtabala.dev" target="_blank">← MAIN SITE</a>
+  </div>
+</div>
+
+<footer>
+  © 2026 ELIFNUR TABALA &nbsp;·&nbsp; ALL RIGHTS RESERVED &nbsp;·&nbsp; MADE WITH ♥ AND CAFFEINE
+</footer>
+
+<script>
+  // Toggle tech details
+  function toggleDetails(btn) {
+    const details = btn.nextElementSibling;
+    const isOpen = details.classList.contains('open');
+    details.classList.toggle('open', !isOpen);
+    btn.textContent = isOpen ? '▶ TECH DETAILS' : '▼ TECH DETAILS';
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Skill bar animation on hover (also trigger on scroll-visible)
+  const skillBlocks = document.querySelectorAll('.skill-block');
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-fill').forEach(fill => {
+          fill.style.width = fill.style.getPropertyValue('--w') ||
+            getComputedStyle(fill).getPropertyValue('--w');
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  skillBlocks.forEach(b => skillObserver.observe(b));
+</script>
+</body>
+</html>
