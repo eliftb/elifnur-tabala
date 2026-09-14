@@ -2,948 +2,1201 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elifnur Tabala — Project Portfolio</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
-
-  :root {
-    --bg:       #0a0a0f;
-    --bg2:      #0f0f1a;
-    --panel:    #12121f;
-    --border:   #2a2a4a;
-    --accent:   #00ff88;
-    --accent2:  #ff6b6b;
-    --accent3:  #6b8aff;
-    --accent4:  #ffd700;
-    --text:     #e0e0ff;
-    --muted:    #7070a0;
-    --pixel:    'Press Start 2P', monospace;
-    --mono:     'Share Tech Mono', monospace;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--mono);
-    font-size: 14px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* SCANLINES OVERLAY */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,0,0,0.08) 2px,
-      rgba(0,0,0,0.08) 4px
-    );
-    pointer-events: none;
-    z-index: 9999;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: rgba(10,10,15,0.95);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    backdrop-filter: blur(10px);
-  }
-
-  .nav-logo {
-    font-family: var(--pixel);
-    font-size: 10px;
-    color: var(--accent);
-    text-shadow: 0 0 10px var(--accent);
-  }
-
-  .nav-links { display: flex; gap: 28px; }
-  .nav-links a {
-    font-family: var(--pixel);
-    font-size: 7px;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 1px;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 100px 40px 60px;
-    position: relative;
-  }
-
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,255,136,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,255,136,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-    animation: gridMove 20s linear infinite;
-  }
-  @keyframes gridMove {
-    from { background-position: 0 0; }
-    to   { background-position: 40px 40px; }
-  }
-
-  .hero-eyebrow {
-    font-family: var(--pixel);
-    font-size: 8px;
-    color: var(--accent);
-    letter-spacing: 3px;
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.2s;
-  }
-
-  .hero-title {
-    font-family: var(--pixel);
-    font-size: clamp(18px, 4vw, 36px);
-    color: #fff;
-    text-shadow: 0 0 30px rgba(0,255,136,0.4), 0 0 60px rgba(0,255,136,0.15);
-    margin-bottom: 12px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.4s;
-    line-height: 1.6;
-  }
-
-  .hero-title span { color: var(--accent); }
-
-  .hero-sub {
-    font-size: 13px;
-    color: var(--muted);
-    max-width: 600px;
-    margin: 16px auto 36px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.6s;
-  }
-
-  .hero-badges {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.8s;
-    margin-bottom: 40px;
-  }
-
-  .badge {
-    font-family: var(--pixel);
-    font-size: 7px;
-    padding: 6px 12px;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    letter-spacing: 1px;
-  }
-
-  .badge.red   { border-color: var(--accent2); color: var(--accent2); }
-  .badge.blue  { border-color: var(--accent3); color: var(--accent3); }
-  .badge.gold  { border-color: var(--accent4); color: var(--accent4); }
-
-  .score-bar {
-    font-family: var(--pixel);
-    font-size: 9px;
-    color: var(--accent4);
-    letter-spacing: 2px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 1s;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* SECTIONS */
-  section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 80px 40px;
-  }
-
-  .section-label {
-    font-family: var(--pixel);
-    font-size: 8px;
-    color: var(--accent);
-    letter-spacing: 3px;
-    margin-bottom: 8px;
-  }
-
-  .section-title {
-    font-family: var(--pixel);
-    font-size: clamp(14px, 2.5vw, 22px);
-    color: #fff;
-    margin-bottom: 48px;
-    line-height: 1.6;
-  }
-
-  .section-title span { color: var(--accent); }
-
-  /* PROJECTS GRID */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-    gap: 24px;
-  }
-
-  .project-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 28px;
-    position: relative;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    overflow: hidden;
-  }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--card-accent, var(--accent));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-
-  .project-card:hover {
-    border-color: var(--card-accent, var(--accent));
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-  }
-
-  .project-card:hover::before { transform: scaleX(1); }
-
-  .card-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 16px;
-  }
-
-  .card-icon {
-    font-size: 28px;
-    flex-shrink: 0;
-    line-height: 1;
-  }
-
-  .card-title-group { flex: 1; }
-
-  .card-level {
-    font-family: var(--pixel);
-    font-size: 6px;
-    color: var(--card-accent, var(--accent));
-    letter-spacing: 2px;
-    margin-bottom: 4px;
-  }
-
-  .card-title {
-    font-family: var(--pixel);
-    font-size: 10px;
-    color: #fff;
-    line-height: 1.6;
-    margin-bottom: 6px;
-  }
-
-  .card-role {
-    font-size: 11px;
-    color: var(--muted);
-  }
-
-  .card-desc {
-    font-size: 12px;
-    color: #a0a0c0;
-    line-height: 1.7;
-    margin-bottom: 18px;
-  }
-
-  /* TECH DETAILS — collapsible */
-  .tech-toggle {
-    font-family: var(--pixel);
-    font-size: 7px;
-    color: var(--card-accent, var(--accent));
-    cursor: pointer;
-    letter-spacing: 1px;
-    background: none;
-    border: 1px solid var(--card-accent, var(--accent));
-    padding: 6px 12px;
-    margin-bottom: 12px;
-    display: inline-block;
-    transition: background 0.2s, color 0.2s;
-    user-select: none;
-  }
-  .tech-toggle:hover {
-    background: var(--card-accent, var(--accent));
-    color: #000;
-  }
-
-  .tech-details {
-    display: none;
-    margin-bottom: 16px;
-  }
-
-  .tech-details.open { display: block; }
-
-  .tech-detail-item {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 8px;
-    font-size: 11px;
-    align-items: flex-start;
-  }
-
-  .detail-key {
-    font-family: var(--pixel);
-    font-size: 6px;
-    color: var(--card-accent, var(--accent));
-    min-width: 90px;
-    padding-top: 2px;
-    flex-shrink: 0;
-  }
-
-  .detail-val { color: #a0a0c0; line-height: 1.5; }
-
-  /* STACK TAGS */
-  .stack-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 18px;
-  }
-
-  .tag {
-    font-family: var(--pixel);
-    font-size: 6px;
-    padding: 4px 8px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    letter-spacing: 0.5px;
-  }
-
-  /* CARD LINKS */
-  .card-links {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .card-link {
-    font-family: var(--pixel);
-    font-size: 7px;
-    padding: 7px 14px;
-    text-decoration: none;
-    letter-spacing: 1px;
-    transition: all 0.2s;
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
-
-  .card-link.primary {
-    border-color: var(--card-accent, var(--accent));
-    color: var(--card-accent, var(--accent));
-  }
-
-  .card-link:hover {
-    background: var(--card-accent, var(--accent));
-    color: #000;
-    border-color: var(--card-accent, var(--accent));
-  }
-
-  .card-link.disabled {
-    opacity: 0.3;
-    pointer-events: none;
-  }
-
-  /* KTR BADGE */
-  .ktr-badge {
-    display: inline-block;
-    font-family: var(--pixel);
-    font-size: 7px;
-    padding: 5px 10px;
-    background: rgba(255, 215, 0, 0.1);
-    border: 1px solid var(--accent4);
-    color: var(--accent4);
-    margin-bottom: 12px;
-    letter-spacing: 1px;
-  }
-
-  /* DIVIDER */
-  .pixel-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0;
-  }
-
-  /* SKILLS */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-  }
-
-  .skill-block {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 22px;
-    transition: border-color 0.3s;
-  }
-
-  .skill-block:hover { border-color: var(--accent3); }
-
-  .skill-block-title {
-    font-family: var(--pixel);
-    font-size: 8px;
-    color: var(--accent3);
-    margin-bottom: 14px;
-    letter-spacing: 1px;
-  }
-
-  .skill-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .skill-name { font-size: 12px; color: var(--text); min-width: 130px; }
-
-  .skill-bar {
-    flex: 1;
-    height: 6px;
-    background: var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skill-fill {
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    background: var(--accent3);
-    width: 0;
-    transition: width 1s ease;
-  }
-
-  .skill-block:hover .skill-fill { width: var(--w); }
-
-  /* STATS */
-  .stats-row {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 60px;
-  }
-
-  .stat-box {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 20px 28px;
-    text-align: center;
-    flex: 1;
-    min-width: 140px;
-    transition: border-color 0.3s;
-  }
-
-  .stat-box:hover { border-color: var(--accent4); }
-
-  .stat-val {
-    font-family: var(--pixel);
-    font-size: 18px;
-    color: var(--accent4);
-    display: block;
-    margin-bottom: 8px;
-    text-shadow: 0 0 12px rgba(255,215,0,0.4);
-  }
-
-  .stat-label {
-    font-family: var(--pixel);
-    font-size: 6px;
-    color: var(--muted);
-    letter-spacing: 1px;
-  }
-
-  /* CONTACT */
-  .contact-section {
-    text-align: center;
-    padding: 80px 40px;
-    border-top: 1px solid var(--border);
-  }
-
-  .contact-links {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 32px;
-  }
-
-  .contact-link {
-    font-family: var(--pixel);
-    font-size: 8px;
-    padding: 12px 24px;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    letter-spacing: 1px;
-    transition: all 0.25s;
-  }
-
-  .contact-link:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    box-shadow: 0 0 20px rgba(0,255,136,0.2);
-  }
-
-  /* BLINK CURSOR */
-  .blink { animation: blink 1s step-end infinite; }
-  @keyframes blink { 50% { opacity: 0; } }
-
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 30px;
-    font-family: var(--pixel);
-    font-size: 7px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    letter-spacing: 1px;
-  }
-
-  /* SCROLL REVEAL */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 600px) {
-    nav { padding: 12px 20px; }
-    .nav-links { gap: 14px; }
-    section { padding: 60px 20px; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .hero-title { font-size: 14px; }
-  }
-</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#080b11">
+<title>Elifnur Tabala — Perception Engineer</title>
+<meta name="description" content="Elifnur Tabala — robotics perception engineer. LiDAR and stereo-camera sensor fusion on ROS2, embedded ML, and real-time computer vision. TEKNOFEST Robotaksi 2026 finalist. Available for a six-month internship, February to August 2027.">
+<meta name="author" content="Elifnur Tabala">
+<link rel="canonical" href="https://elifnurtabala.dev/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Elifnur Tabala — Perception Engineer">
+<meta property="og:description" content="LiDAR + stereo-camera sensor fusion on ROS2, embedded ML, real-time CV. TEKNOFEST Robotaksi 2026 finalist. Open for a six-month internship, Feb–Aug 2027.">
+<meta property="og:url" content="https://elifnurtabala.dev/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23080b11'/><circle cx='9' cy='20' r='2' fill='%2335c9c2'/><circle cx='16' cy='14' r='2.4' fill='%23ffa23a'/><circle cx='23' cy='21' r='2' fill='%2335c9c2'/><path d='M5 27h22' stroke='%231c2735' stroke-width='1.5'/></svg>">
 </head>
 <body>
+<style>
+:root{
+  --void:#080b11;
+  --ground:#0c1119;
+  --panel:#10161f;
+  --panel2:#141c27;
+  --line:#1c2735;
+  --line-hi:#2c3d52;
+  --ink:#e3eaf3;
+  --ink2:#a8b8cb;
+  --muted:#6d8098;
+  --amber:#ffa23a;
+  --amber-dim:#c97b26;
+  --teal:#35c9c2;
+  --mint:#4fd18b;
+  --mono:ui-monospace,"Cascadia Mono","SF Mono","Segoe UI Mono","Roboto Mono",Menlo,Consolas,monospace;
+  --sans:"Segoe UI Variable Text","Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --rail:132px;
+  --maxw:1080px;
+  color-scheme:dark;
+}
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">ELIF.EXE<span class="blink">_</span></div>
+*{margin:0;padding:0;box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--void);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+::selection{background:var(--amber);color:#0b0d12}
+
+a{color:inherit}
+
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* ---------- shared atoms ---------- */
+
+.label{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.wrap{
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding-inline:28px;
+}
+
+.rule{height:1px;background:var(--line);border:0}
+
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---------- nav ---------- */
+
+.nav{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:60;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:14px 28px;
+  background:rgba(8,11,17,.72);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav-id{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.1em;
+  color:var(--ink);
+}
+.nav-id b{color:var(--amber);font-weight:400}
+
+.nav-links{display:flex;gap:4px;align-items:center}
+
+.nav-links a{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:none;
+  padding:6px 10px;
+  border-radius:2px;
+  transition:color .18s,background .18s;
+}
+.nav-links a:hover{color:var(--ink);background:var(--panel2)}
+.nav-links a.active{color:var(--amber)}
+
+.nav-cta{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--void);
+  background:var(--amber);
+  padding:7px 14px;
+  border-radius:2px;
+  transition:filter .18s;
+}
+.nav-cta:hover{filter:brightness(1.12)}
+
+@media (max-width:800px){
+  .nav-links a:not(.nav-cta){display:none}
+}
+
+/* ---------- telemetry rail ---------- */
+
+.rail{
+  position:fixed;
+  left:0;top:0;bottom:0;
+  width:var(--rail);
+  z-index:40;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:22px;
+  padding:0 0 0 24px;
+  border-right:1px solid var(--line);
+  background:linear-gradient(90deg,rgba(12,17,25,.86),rgba(12,17,25,0));
+  pointer-events:none;
+}
+
+@media (min-width:1240px){
+  .rail{display:flex}
+}
+
+.rail-item{display:flex;flex-direction:column;gap:2px}
+.rail-k{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.rail-v{font-family:var(--mono);font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.rail-v.hot{color:var(--amber)}
+
+.rail-bar{
+  width:2px;
+  flex:0 0 200px;
+  background:var(--line);
+  position:relative;
+  margin-left:2px;
+}
+.rail-bar span{
+  position:absolute;
+  left:-1px;right:-1px;top:0;
+  background:var(--amber);
+  height:0%;
+}
+
+/* ---------- hero ---------- */
+
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:flex-end;
+  padding:120px 0 52px;
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+}
+
+#cloud{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 62%,transparent 98%);
+  mask-image:linear-gradient(180deg,transparent,#000 18%,#000 62%,transparent 98%);
+}
+
+.hero-veil{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(120% 70% at 50% 8%,rgba(8,11,17,.2),rgba(8,11,17,.9) 78%),
+    linear-gradient(180deg,rgba(8,11,17,.55),rgba(8,11,17,0) 30%,rgba(8,11,17,.94));
+  pointer-events:none;
+}
+
+.hero-sim{
+  position:absolute;
+  left:28px;top:96px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.hero-sim .label{color:var(--line-hi)}
+
+.hero-inner{position:relative;z-index:2;width:100%}
+
+.hero-eyebrow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 18px;
+  margin-bottom:26px;
+}
+.hero-eyebrow span{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+.hero-eyebrow span + span{color:var(--muted)}
+
+h1.hero-name{
+  font-family:var(--mono);
+  font-weight:400;
+  font-size:clamp(2.9rem,9.2vw,6.6rem);
+  line-height:.92;
+  letter-spacing:-.045em;
+  text-transform:uppercase;
+  text-wrap:balance;
+  margin-bottom:26px;
+}
+h1.hero-name em{display:block;font-style:normal;color:var(--ink)}
+h1.hero-name em + em{color:var(--muted)}
+
+.hero-lede{
+  max-width:58ch;
+  font-size:clamp(1rem,1.9vw,1.2rem);
+  line-height:1.6;
+  color:var(--ink2);
+  margin-bottom:38px;
+}
+.hero-lede b{color:var(--ink);font-weight:600}
+
+.readout{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  border:1px solid var(--line);
+  background:rgba(16,22,31,.62);
+  backdrop-filter:blur(8px);
+}
+.readout div{
+  padding:14px 18px;
+  border-right:1px solid var(--line);
+}
+.readout div:last-child{border-right:0}
+@media (max-width:760px){
+  .readout div{border-right:0;border-bottom:1px solid var(--line)}
+  .readout div:last-child{border-bottom:0}
+}
+.readout .num{
+  display:block;
+  font-family:var(--mono);
+  font-size:1.45rem;
+  line-height:1.15;
+  color:var(--amber);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.02em;
+}
+.readout .num small{font-size:.62em;color:var(--amber-dim)}
+.readout .cap{display:block;margin-top:5px}
+
+/* ---------- status band ---------- */
+
+.band{
+  border-bottom:1px solid var(--line);
+  background:var(--ground);
+}
+.band-inner{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:12px 26px;
+  padding-block:18px;
+}
+.dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--mint);
+  box-shadow:0 0 0 4px rgba(79,209,139,.14);
+  flex:none;
+}
+.band-lead{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--ink);text-transform:uppercase}
+.band-lead b{color:var(--mint);font-weight:400}
+.band-meta{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+
+/* ---------- sections ---------- */
+
+section{padding-block:96px;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+
+.sec-head{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin-bottom:44px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line);
+}
+.sec-head h2{
+  font-family:var(--mono);
+  font-weight:400;
+  font-size:clamp(1.3rem,3vw,1.9rem);
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.sec-head .idx{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.1em}
+.sec-head .note{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:640px){.sec-head .note{display:none}}
+
+/* ---------- experience log ---------- */
+
+.log{display:flex;flex-direction:column}
+
+.log-row{
+  display:grid;
+  grid-template-columns:118px 1fr;
+  gap:28px;
+  padding-block:30px;
+  border-top:1px solid var(--line);
+}
+.log-row:first-child{border-top:0;padding-top:0}
+@media (max-width:720px){
+  .log-row{grid-template-columns:1fr;gap:12px}
+}
+
+.log-when{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em;padding-top:4px}
+.log-when b{display:block;color:var(--teal);font-weight:400}
+
+.log-role{
+  font-family:var(--mono);
+  font-size:1.18rem;
+  letter-spacing:-.01em;
+  color:var(--ink);
+  margin-bottom:4px;
+}
+.log-org{font-size:13.5px;color:var(--ink2);margin-bottom:16px}
+.log-org span{color:var(--muted)}
+
+.bullets{list-style:none;display:flex;flex-direction:column;gap:11px}
+.bullets li{position:relative;padding-left:20px;color:var(--ink2);font-size:14.5px;max-width:70ch}
+.bullets li::before{
+  content:"";
+  position:absolute;
+  left:0;top:.62em;
+  width:7px;height:1px;
+  background:var(--amber);
+}
+.bullets li b{color:var(--ink);font-weight:600;font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---------- detections (projects) ---------- */
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+
+.det{
+  position:relative;
+  background:var(--panel);
+  border:1px solid var(--line);
+  padding:26px 24px 24px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  transition:border-color .22s,background .22s,transform .22s;
+}
+.det:hover{border-color:var(--line-hi);background:var(--panel2);transform:translateY(-2px)}
+
+.det::before,.det::after{
+  content:"";
+  position:absolute;
+  width:13px;height:13px;
+  border:1px solid var(--amber);
+  opacity:0;
+  transition:opacity .22s;
+  pointer-events:none;
+}
+.det::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.det::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.det:hover::before,.det:hover::after{opacity:1}
+
+.det-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+.chip{
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  padding:4px 8px;
+  border:1px solid var(--line-hi);
+  color:var(--muted);
+  border-radius:2px;
+}
+.chip.metric{border-color:rgba(255,162,58,.4);color:var(--amber);font-variant-numeric:tabular-nums}
+.chip.live{border-color:rgba(79,209,139,.35);color:var(--mint)}
+.chip.wip{border-color:rgba(53,201,194,.35);color:var(--teal)}
+
+.det h3{
+  font-family:var(--mono);
+  font-weight:400;
+  font-size:1.32rem;
+  letter-spacing:-.02em;
+  color:var(--ink);
+}
+.det .sub{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em;margin-top:-8px}
+.det p{color:var(--ink2);font-size:14.5px;max-width:60ch}
+
+.det ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.det ul li{position:relative;padding-left:18px;font-size:13.8px;color:var(--ink2)}
+.det ul li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:1px;background:var(--line-hi)}
+.det ul li b{color:var(--ink);font-family:var(--mono);font-weight:400;font-variant-numeric:tabular-nums}
+
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tags span{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.06em;
+  color:var(--muted);
+  background:var(--void);
+  border:1px solid var(--line);
+  padding:3px 7px;
+}
+
+.det-link{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--amber);
+  text-decoration:none;
+  align-self:flex-start;
+  border-bottom:1px solid transparent;
+  transition:border-color .18s;
+}
+.det-link:hover{border-bottom-color:var(--amber)}
+
+/* ---------- archive ---------- */
+
+.archive{display:flex;flex-direction:column;margin-top:18px}
+.arc{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:20px;
+  align-items:center;
+  padding:13px 4px;
+  border-top:1px solid var(--line);
+  text-decoration:none;
+  transition:background .18s,padding-left .18s;
+}
+.arc:hover{background:var(--panel);padding-left:12px}
+.arc-name{font-family:var(--mono);font-size:14px;color:var(--ink)}
+.arc:hover .arc-name{color:var(--amber)}
+.arc-desc{font-size:13px;color:var(--muted);text-align:right}
+.arc-lang{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);min-width:72px;text-align:right}
+@media (max-width:720px){
+  .arc{grid-template-columns:1fr auto}
+  .arc-desc{display:none}
+}
+
+/* ---------- stack ---------- */
+
+.stack{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:760px){.stack{grid-template-columns:1fr}}
+
+.stack-cell{background:var(--void);padding:26px 24px}
+.stack-cell h3{
+  font-family:var(--mono);
+  font-weight:400;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin-bottom:16px;
+}
+.stack-cell ul{list-style:none;display:flex;flex-wrap:wrap;gap:7px}
+.stack-cell li{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink2);
+  border:1px solid var(--line);
+  padding:4px 9px;
+  transition:border-color .18s,color .18s;
+}
+.stack-cell li:hover{border-color:var(--line-hi);color:var(--ink)}
+
+/* ---------- about / signal ---------- */
+
+.two{display:grid;grid-template-columns:1.15fr 1fr;gap:56px}
+@media (max-width:900px){.two{grid-template-columns:1fr;gap:44px}}
+
+.edu-inst{font-family:var(--mono);font-size:1.18rem;color:var(--ink);margin-bottom:4px}
+.edu-meta{font-size:14px;color:var(--ink2);margin-bottom:22px}
+.edu-meta span{color:var(--muted)}
+
+.gpa{
+  display:inline-flex;
+  align-items:baseline;
+  gap:8px;
+  font-family:var(--mono);
+  font-variant-numeric:tabular-nums;
+  border:1px solid var(--line);
+  padding:9px 14px;
+  margin-bottom:24px;
+}
+.gpa b{font-size:1.35rem;color:var(--amber);font-weight:400}
+.gpa i{font-style:normal;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+.course{font-size:13.8px;color:var(--ink2);max-width:58ch}
+.course b{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;font-weight:400}
+
+.langs{display:flex;flex-direction:column;gap:14px;margin-top:20px}
+.lang{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center}
+.lang-n{font-family:var(--mono);font-size:13.5px;color:var(--ink)}
+.lang-lvl{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.bars{display:flex;gap:3px}
+.bars i{width:16px;height:4px;background:var(--line);display:block}
+.bars i.on{background:var(--amber)}
+
+/* ---------- contact ---------- */
+
+#contact{padding-block:110px}
+
+.cta-line{
+  font-family:var(--mono);
+  font-weight:400;
+  font-size:clamp(1.7rem,5.4vw,3.4rem);
+  line-height:1.02;
+  letter-spacing:-.04em;
+  text-transform:uppercase;
+  text-wrap:balance;
+  margin-bottom:22px;
+}
+.cta-line span{color:var(--muted)}
+
+.cta-sub{max-width:54ch;color:var(--ink2);font-size:15.5px;margin-bottom:38px}
+
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:.06em;
+  text-decoration:none;
+  color:var(--ink);
+  border:1px solid var(--line-hi);
+  padding:11px 18px;
+  transition:background .18s,color .18s,border-color .18s;
+}
+.links a:hover{background:var(--ink);color:var(--void);border-color:var(--ink)}
+.links a.primary{background:var(--amber);border-color:var(--amber);color:var(--void)}
+.links a.primary:hover{filter:brightness(1.12);background:var(--amber);color:var(--void)}
+.links a .ar{color:var(--muted)}
+.links a:hover .ar{color:inherit}
+
+footer{
+  border-top:1px solid var(--line);
+  padding-block:26px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 26px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* ---------- reveal ---------- */
+
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  .rv{opacity:1;transform:none}
+}
+
+/* the fixed rail gets its own gutter; everything else centres in what remains */
+@media (min-width:1240px){
+  body{padding-left:var(--rail)}
+  .nav{left:var(--rail)}
+}
+</style>
+
+<nav class="nav">
+  <a class="nav-id" href="#top">ELIFNUR<b>_</b>TABALA</a>
   <div class="nav-links">
-    <a href="#projects">PROJECTS</a>
-    <a href="#skills">SKILLS</a>
-    <a href="#contact">CONTACT</a>
-    <a href="https://elifnurtabala.dev" target="_blank">← MAIN SITE</a>
+    <a href="#work">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#stack">Stack</a>
+    <a href="#about">Background</a>
+    <a class="nav-cta" href="#contact">Hire for Feb 2027</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-eyebrow">// PROJECT PORTFOLIO</div>
-  <h1 class="hero-title">ELIFNUR <span>TABALA</span></h1>
-  <p class="hero-sub">Full technical deep-dive: every project, every stack decision, every GitHub link. No fluff.</p>
-  <div class="hero-badges">
-    <span class="badge">ROS2 ✓</span>
-    <span class="badge gold">KTR 87/100 ★</span>
-    <span class="badge red">TEKNOFEST</span>
-    <span class="badge blue">SPRING BOOT</span>
-    <span class="badge">C / SYSTEMS</span>
-    <span class="badge red">CLAUDE API</span>
-    <span class="badge blue">GPA 3.32</span>
+<aside class="rail" aria-hidden="true">
+  <div class="rail-item"><span class="rail-k">Track</span><span class="rail-v" id="r-track">HERO</span></div>
+  <div class="rail-item"><span class="rail-k">Range</span><span class="rail-v" id="r-range">000 m</span></div>
+  <div class="rail-bar"><span id="r-prog"></span></div>
+  <div class="rail-item"><span class="rail-k">Render</span><span class="rail-v hot" id="r-fps">-- fps</span></div>
+  <div class="rail-item"><span class="rail-k">Node</span><span class="rail-v">/perception</span></div>
+</aside>
+
+<header class="hero" id="top">
+  <canvas id="cloud" aria-hidden="true"></canvas>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-sim" aria-hidden="true"><span class="label">SIM · synthetic point cloud · sweep 10 Hz</span></div>
+
+  <div class="hero-inner wrap">
+    <div class="hero-eyebrow rv">
+      <span>Sensor Fusion</span><span>Embedded ML</span><span>ROS2</span><span>Istanbul, TR</span>
+    </div>
+
+    <h1 class="hero-name rv"><em>Elifnur</em><em>Tabala</em></h1>
+
+    <p class="hero-lede rv">I build the part of an autonomous system that decides <b>what it is looking at</b> — LiDAR and stereo-camera fusion running on the vehicle, in real time, inside a latency budget. Fourth-year Computer Engineering student and TEKNOFEST Robotaksi 2026 finalist.</p>
+
+    <div class="readout rv">
+      <div>
+        <span class="num">87<small>/100</small></span>
+        <span class="label cap">KTR qualification score</span>
+      </div>
+      <div>
+        <span class="num">30<small> fps</small></span>
+        <span class="label cap">Lane detection, on-vehicle</span>
+      </div>
+      <div>
+        <span class="num">&lt;100<small> ms</small></span>
+        <span class="label cap">Perception latency</span>
+      </div>
+      <div>
+        <span class="num">94<small>%</small></span>
+        <span class="label cap">YOLOPv2 precision</span>
+      </div>
+    </div>
   </div>
-  <div class="score-bar">▶ PROJECTS LOADED: 5 &nbsp;·&nbsp; COMMITS: MANY &nbsp;·&nbsp; BUGS FIXED: MORE</div>
+</header>
+
+<div class="band">
+  <div class="wrap band-inner">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="band-lead"><b>Available</b> — six-month curricular internship, Feb–Aug 2027</span>
+    <span class="band-meta">University internship agreement provided · Robotics, perception, or embedded ML teams</span>
+  </div>
 </div>
 
-<hr class="pixel-divider">
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="idx">01</span>
+      <h2>Experience</h2>
+      <span class="note">Run log</span>
+    </div>
 
-<!-- STATS -->
-<section id="stats">
-  <div class="stats-row reveal">
-    <div class="stat-box">
-      <span class="stat-val">87</span>
-      <span class="stat-label">KTR SCORE / 100</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-val">3.32</span>
-      <span class="stat-label">GPA / 4.00</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-val">679</span>
-      <span class="stat-label">TESTS PASSING</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-val">10+</span>
-      <span class="stat-label">GAZEBO SCENARIOS</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-val">4</span>
-      <span class="stat-label">LANGUAGES CODED</span>
+    <div class="log">
+      <article class="log-row rv">
+        <div class="log-when">2025 — 2026<b>18 months</b></div>
+        <div>
+          <h3 class="log-role">Software Engineer — Robotics Perception</h3>
+          <p class="log-org">Sahi Otonom Takımı <span>· TEKNOFEST Robotaksi 2026 · Finalist</span></p>
+          <ul class="bullets">
+            <li>Led the perception pipeline for a finalist autonomous vehicle, scoring <b>87/100</b> on the Constrained Test Route qualification at national level.</li>
+            <li>Fused a <b>VLP-16</b> LiDAR with a <b>ZED 2i</b> stereo camera over ROS2 Humble for real-time obstacle detection and localization.</li>
+            <li>Shipped a YOLOPv2 lane-detection module at <b>94%</b> precision, <b>30 FPS</b>, sub-<b>100 ms</b> latency, publishing live markers into the autonomous control stack via OpenCV.</li>
+            <li>Validated the fusion pipeline across <b>10</b> Gazebo scenarios at a <b>100%</b> pass rate; integrated A* path planning with PID control on Ubuntu 22.04.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="log-row rv">
+        <div class="log-when">Jun — Jul 2026<b>internship</b></div>
+        <div>
+          <h3 class="log-role">IT Intern — Systems Integration</h3>
+          <p class="log-org">Mengerler Ticaret Türk A.Ş. <span>· Mercedes-Benz authorized dealer &amp; service</span></p>
+          <ul class="bullets">
+            <li>Deployed <b>50</b> Windows clients into an Active Directory domain with system hardening and group policy, holding <b>99.5%</b> uptime through the internship.</li>
+            <li>Completed <b>15</b> enterprise software rollouts across service operations, with integration and network-connectivity testing on mission-critical systems.</li>
+          </ul>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
-  <div class="section-label">// COMPLETED LEVELS</div>
-  <h2 class="section-title">PROJECT<span>_</span>ARCHIVE</h2>
-
-  <div class="projects-grid">
-
-    <!-- SAHI OTONOM -->
-    <div class="project-card reveal" style="--card-accent: #ffd700;">
-      <div class="ktr-badge">★ TEKNOFEST KTR: 87/100</div>
-      <div class="card-header">
-        <div class="card-icon">🚗</div>
-        <div class="card-title-group">
-          <div class="card-level">LEVEL 05 — FLAGSHIP PROJECT</div>
-          <div class="card-title">SAHI OTONOM<br>ROBOTAKSI</div>
-          <div class="card-role">Software Developer · Autonomous Systems · 2025–Present</div>
-        </div>
-      </div>
-      <p class="card-desc">
-        Autonomous vehicle system competing at Teknofest Robotaksi — Turkey's premier autonomous driving competition.
-        Full perception, navigation, and control stack on real hardware. KTR (technical report) scored 87/100.
-      </p>
-      <button class="tech-toggle" onclick="toggleDetails(this)">▶ TECH DETAILS</button>
-      <div class="tech-details">
-        <div class="tech-detail-item">
-          <span class="detail-key">PERCEPTION</span>
-          <span class="detail-val">LiDAR + ZED 2i stereo camera sensor fusion pipeline in ROS2 Humble; real-time depth estimation and obstacle detection</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">LANE DETECT</span>
-          <span class="detail-val">YOLOPv2-based lane detection integrated with OpenCV; output fed as ROS2 topic to decision node</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">NAVIGATION</span>
-          <span class="detail-val">A* path planning algorithm; PID control loop for steering, braking, propulsion</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">SIMULATION</span>
-          <span class="detail-val">10+ autonomous driving test scenarios in Gazebo before hardware deployment; caught critical pipeline errors pre-integration</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">HARDWARE</span>
-          <span class="detail-val">STM32F4 MCUs over I2C (400kHz) for steering, braking, propulsion; Ubuntu 22.04, ROS2 Humble</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">TEAM</span>
-          <span class="detail-val">4-engineer robotics software team; collaborative ROS2 node development and integration</span>
-        </div>
-      </div>
-      <div class="stack-tags">
-        <span class="tag">ROS2 HUMBLE</span><span class="tag">PYTHON</span><span class="tag">OPENCV</span>
-        <span class="tag">YOLOPV2</span><span class="tag">LIDAR</span><span class="tag">ZED SDK</span>
-        <span class="tag">GAZEBO</span><span class="tag">A*</span><span class="tag">PID</span>
-        <span class="tag">STM32F4</span><span class="tag">I2C</span><span class="tag">UBUNTU 22.04</span>
-      </div>
-      <div class="card-links">
-        <a class="card-link primary" href="https://github.com/eliftb" target="_blank">⌥ GITHUB (PRIVATE)</a>
-        <a class="card-link" href="https://teknofest.org" target="_blank">↗ TEKNOFEST</a>
-      </div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="idx">02</span>
+      <h2>Projects</h2>
+      <span class="note">Four tracked · badges are measured</span>
     </div>
 
-    <!-- DRAPE -->
-    <div class="project-card reveal" style="--card-accent: #ff6b6b;">
-      <div class="card-header">
-        <div class="card-icon">👗</div>
-        <div class="card-title-group">
-          <div class="card-level">LEVEL 04 — AI VISION</div>
-          <div class="card-title">DRAPE<br>AI OUTFIT STUDIO</div>
-          <div class="card-role">Full-Stack Developer · AI/CV · Solo Project</div>
+    <div class="grid">
+
+      <article class="det rv">
+        <div class="det-top">
+          <span class="chip">Edge AI</span>
+          <span class="chip wip">In progress</span>
+          <span class="chip metric">6 classes</span>
         </div>
-      </div>
-      <p class="card-desc">
-        Real-time virtual try-on system using computer vision and AI. Upload a garment — Claude Vision analyzes it,
-        MediaPipe overlays it on your live camera feed, emotion detection tells you if you actually like it.
-      </p>
-      <button class="tech-toggle" onclick="toggleDetails(this)">▶ TECH DETAILS</button>
-      <div class="tech-details">
-        <div class="tech-detail-item">
-          <span class="detail-key">CV PIPELINE</span>
-          <span class="detail-val">MediaPipe pose estimation + body segmentation to overlay garments on live video feed in real time</span>
+        <h3>SubScan</h3>
+        <p class="sub">Subsurface pest detection via sensor fusion</p>
+        <p>Detecting pests underground by listening to them: a seismic and acoustic signal pipeline that classifies six species from vibration signatures, sized to run on a microcontroller in a field.</p>
+        <ul>
+          <li>End-to-end synthetic data pipeline in Python — FFT feature extraction, sliding time-window segmentation, <b>1D CNN</b> for time-series classification.</li>
+          <li>Hardware in integration: <b>STM32F411</b>, ADXL345 seismic accelerometer, acoustic sensor, DHT22 thermal.</li>
+          <li>Deployment strategy is post-training quantization with a sub-<b>100 ms</b> inference budget on constrained hardware.</li>
+          <li>Field validation against real subsurface data at agricultural test sites, <b>Oct 2026</b>.</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>Keras</span><span>NumPy</span><span>SciPy</span><span>STM32</span><span>Signal processing</span></div>
+        <a class="det-link" href="https://github.com/eliftb/SubScan" target="_blank" rel="noopener">github.com/eliftb/SubScan <span aria-hidden="true">↗</span></a>
+      </article>
+
+      <article class="det rv">
+        <div class="det-top">
+          <span class="chip">NLP</span>
+          <span class="chip live">Shipped</span>
+          <span class="chip metric">90.2% accuracy</span>
         </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">AI LAYER</span>
-          <span class="detail-val">Claude Vision API for intelligent garment image processing and analysis; remove.bg for background removal</span>
+        <h3>Turkish Emotion Classifier</h3>
+        <p class="sub">7-class NLP system with research validation</p>
+        <p>A production Turkish emotion model trained on a corpus I annotated myself — and an honest account of the one class the data cannot support.</p>
+        <ul>
+          <li>Curated <b>37,000</b> Turkish text records through a purpose-built annotation interface; TF-IDF plus logistic regression, running locally with <b>no API dependency</b>.</li>
+          <li><b>90.2%</b> accuracy on a <b>7,135</b>-record test set, validated across <b>500</b> user sessions.</li>
+          <li>Published a Cohen's kappa inter-annotator analysis quantifying the data ceiling for the rare class — contempt, <b>13</b> samples, <b>0.167</b> F1 — and documented it as a data constraint, not a model one.</li>
+          <li>Shipped with a Flask labeling UI carrying live agreement metrics, plus a Chrome extension for real use.</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>scikit-learn</span><span>Flask</span><span>Chrome Extension</span><span>Annotation</span></div>
+        <a class="det-link" href="https://github.com/eliftb/tr-emotion-class" target="_blank" rel="noopener">github.com/eliftb/tr-emotion-class <span aria-hidden="true">↗</span></a>
+      </article>
+
+      <article class="det rv">
+        <div class="det-top">
+          <span class="chip">Backend</span>
+          <span class="chip live">Shipped</span>
+          <span class="chip metric">99.8% coverage</span>
         </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">EMOTION</span>
-          <span class="detail-val">face-api.js facial emotion detection to score user satisfaction with outfit; drives recommendation engine</span>
+        <h3>Hasad</h3>
+        <p class="sub">Digital marketplace backend, producer to consumer</p>
+        <p>A multi-tenant Spring Boot marketplace built the way a system that handles other people's money has to be built — tested, migrated, and containerized.</p>
+        <ul>
+          <li>JWT authentication with four-tier role-based access control; Flyway migrations for zero-downtime deployments.</li>
+          <li>Normalized PostgreSQL schema with query optimization for tenant data isolation, under <b>serializable</b> transaction isolation.</li>
+          <li><b>679</b> unit and integration tests at <b>99.8%</b> coverage, running automatically in CI/CD.</li>
+          <li>Dockerized with health checks and graceful shutdown for production orchestration.</li>
+        </ul>
+        <div class="tags"><span>Java 17</span><span>Spring Boot 3.2</span><span>PostgreSQL</span><span>Flyway</span><span>Docker</span><span>Spring Security</span></div>
+        <a class="det-link" href="https://github.com/eliftb/digital-marketplace-hasad" target="_blank" rel="noopener">github.com/eliftb/digital-marketplace-hasad <span aria-hidden="true">↗</span></a>
+      </article>
+
+      <article class="det rv">
+        <div class="det-top">
+          <span class="chip">Computer Vision</span>
+          <span class="chip live">Shipped</span>
+          <span class="chip metric">Claude Vision</span>
         </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">BACKEND</span>
-          <span class="detail-val">Node.js orchestration layer managing AI/ML pipelines across Claude Vision, MediaPipe, and remove.bg APIs</span>
-        </div>
-      </div>
-      <div class="stack-tags">
-        <span class="tag">NODE.JS</span><span class="tag">CLAUDE VISION API</span>
-        <span class="tag">MEDIAPIPE</span><span class="tag">FACE-API.JS</span>
-        <span class="tag">JAVASCRIPT</span><span class="tag">REMOVE.BG API</span><span class="tag">AR</span>
-      </div>
-      <div class="card-links">
-        <a class="card-link primary" href="https://github.com/eliftb/drape" target="_blank">⌥ GITHUB</a>
-      </div>
+        <h3>Drape</h3>
+        <p class="sub">AI virtual outfit try-on</p>
+        <p>A try-on app that reads the garment and the body separately, then puts them together: vision-model analysis for the clothing, pose landmarks for the fit.</p>
+        <ul>
+          <li>Claude Vision API for garment analysis, <b>MediaPipe</b> pose landmarks for AR fitting.</li>
+          <li>Emotion detection layer feeding outfit recommendation.</li>
+          <li>Full JavaScript client with the vision pipeline running end to end.</li>
+        </ul>
+        <div class="tags"><span>JavaScript</span><span>Claude API</span><span>MediaPipe</span><span>Computer Vision</span></div>
+        <a class="det-link" href="https://github.com/eliftb/drape" target="_blank" rel="noopener">github.com/eliftb/drape <span aria-hidden="true">↗</span></a>
+      </article>
+
     </div>
 
-    <!-- HASAD -->
-    <div class="project-card reveal" style="--card-accent: #6b8aff;">
-      <div class="card-header">
-        <div class="card-icon">🛒</div>
-        <div class="card-title-group">
-          <div class="card-level">LEVEL 03 — BACKEND</div>
-          <div class="card-title">HASAD<br>DIGITAL MARKETPLACE</div>
-          <div class="card-role">Backend Developer · Java · Spring Boot</div>
-        </div>
-      </div>
-      <p class="card-desc">
-        Production-grade multi-vendor marketplace backend for local producers. Full auth, role management,
-        cart, orders, reviews — 679 tests passing, deployed with Docker.
-      </p>
-      <button class="tech-toggle" onclick="toggleDetails(this)">▶ TECH DETAILS</button>
-      <div class="tech-details">
-        <div class="tech-detail-item">
-          <span class="detail-key">AUTH</span>
-          <span class="detail-val">JWT-based authentication; role-based authorization across 4 roles (SUPER_ADMIN, ADMIN, PRODUCER, CONSUMER)</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">DATABASE</span>
-          <span class="detail-val">PostgreSQL with normalized multi-tenant schema; Flyway migrations (V1–V5); multi-tenant data isolation</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">API</span>
-          <span class="detail-val">RESTful API with Spring Boot 3.2; full admin panel (8+ pages), cart with live badge, address CRUD, review system</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">TESTING</span>
-          <span class="detail-val">679-line test suite passing; fixed critical LOWER() bytea bug via Java stream filtering</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">INFRA</span>
-          <span class="detail-val">Dockerized deployment; Spring Security; port 8080 /api</span>
-        </div>
-      </div>
-      <div class="stack-tags">
-        <span class="tag">JAVA 17</span><span class="tag">SPRING BOOT 3.2</span>
-        <span class="tag">POSTGRESQL</span><span class="tag">JWT</span>
-        <span class="tag">FLYWAY</span><span class="tag">DOCKER</span>
-        <span class="tag">SPRING SECURITY</span><span class="tag">REST API</span>
-      </div>
-      <div class="card-links">
-        <a class="card-link primary" href="https://github.com/eliftb/digital-marketplace-hasad" target="_blank">⌥ GITHUB</a>
-      </div>
-    </div>
-
-    <!-- PAGE REPLACEMENT -->
-    <div class="project-card reveal" style="--card-accent: #00ff88;">
-      <div class="card-header">
-        <div class="card-icon">🖥️</div>
-        <div class="card-title-group">
-          <div class="card-level">LEVEL 02 — SYSTEMS PROGRAMMING</div>
-          <div class="card-title">PAGE REPLACEMENT<br>SIMULATOR</div>
-          <div class="card-role">Systems Programmer · C · OS Internals</div>
-        </div>
-      </div>
-      <p class="card-desc">
-        Low-level memory management simulation in C. Implemented FIFO, LRU, and Optimal from scratch,
-        benchmarked across configurable frame sizes, measured real page fault deltas.
-      </p>
-      <button class="tech-toggle" onclick="toggleDetails(this)">▶ TECH DETAILS</button>
-      <div class="tech-details">
-        <div class="tech-detail-item">
-          <span class="detail-key">ALGORITHMS</span>
-          <span class="detail-val">FIFO, LRU, and Optimal page replacement — implemented from scratch in C with no library dependencies</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">BENCHMARKS</span>
-          <span class="detail-val">Compared page fault rates across 3 configurable frame sizes; Optimal ~30% fewer faults vs FIFO (verify against output)</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">ENGINE</span>
-          <span class="detail-val">Simulation engine with configurable frame count for OS memory management analysis across access patterns</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">WHY IT MATTERS</span>
-          <span class="detail-val">Demonstrates real OS internals knowledge — not a framework tutorial. Same memory management principles used in embedded/RTOS systems</span>
-        </div>
-      </div>
-      <div class="stack-tags">
-        <span class="tag">C</span><span class="tag">SYSTEMS PROGRAMMING</span>
-        <span class="tag">OS INTERNALS</span><span class="tag">MEMORY MANAGEMENT</span>
-      </div>
-      <div class="card-links">
-        <a class="card-link primary" href="https://github.com/eliftb/page-replacement-algorithms" target="_blank">⌥ GITHUB</a>
-      </div>
-    </div>
-
-    <!-- RESTAURANT SITE -->
-    <div class="project-card reveal" style="--card-accent: #ff9f43;">
-      <div class="card-header">
-        <div class="card-icon">🍽️</div>
-        <div class="card-title-group">
-          <div class="card-level">LEVEL 01 — SHIPPED TO PRODUCTION</div>
-          <div class="card-title">ŞANLIURFA KEBAP<br>RESTAURANT SITE</div>
-          <div class="card-role">Full-Stack Developer · Frontend · Deployed</div>
-        </div>
-      </div>
-      <p class="card-desc">
-        Designed and deployed a production website for a real local restaurant. Responsive UI,
-        menu management, live in production. Real users, real traffic.
-      </p>
-      <button class="tech-toggle" onclick="toggleDetails(this)">▶ TECH DETAILS</button>
-      <div class="tech-details">
-        <div class="tech-detail-item">
-          <span class="detail-key">STACK</span>
-          <span class="detail-val">HTML, CSS, JavaScript — zero framework dependencies, hand-crafted responsive layout</span>
-        </div>
-        <div class="tech-detail-item">
-          <span class="detail-key">STATUS</span>
-          <span class="detail-val">Live at sanliurfakebap.com — real production deployment, real users</span>
-        </div>
-      </div>
-      <div class="stack-tags">
-        <span class="tag">HTML</span><span class="tag">CSS</span>
-        <span class="tag">JAVASCRIPT</span><span class="tag">DEPLOYED ✓</span>
-      </div>
-      <div class="card-links">
-        <a class="card-link primary" href="https://sanliurfakebap.com" target="_blank">↗ LIVE SITE</a>
-        <a class="card-link" href="https://github.com/eliftb/kebab-website" target="_blank">⌥ GITHUB</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<hr class="pixel-divider">
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">// SKILL TREE</div>
-  <h2 class="section-title">TECH<span>_</span>STACK</h2>
-
-  <div class="skills-grid">
-    <div class="skill-block reveal">
-      <div class="skill-block-title">LANGUAGES</div>
-      <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">C</span><div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">C++</span><div class="skill-bar"><div class="skill-fill" style="--w:55%"></div></div></div>
-    </div>
-
-    <div class="skill-block reveal">
-      <div class="skill-block-title">ROBOTICS & VISION</div>
-      <div class="skill-item"><span class="skill-name">ROS2 Humble</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">OpenCV</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">LiDAR / ZED SDK</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Gazebo</span><div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Sensor Fusion</span><div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div></div>
-    </div>
-
-    <div class="skill-block reveal">
-      <div class="skill-block-title">BACKEND</div>
-      <div class="skill-item"><span class="skill-name">Spring Boot 3.2</span><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">PostgreSQL</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Node.js</span><div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Docker</span><div class="skill-bar"><div class="skill-fill" style="--w:65%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">REST API / JWT</span><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div></div>
-    </div>
-
-    <div class="skill-block reveal">
-      <div class="skill-block-title">EMBEDDED & CONTROL</div>
-      <div class="skill-item"><span class="skill-name">I2C / UART / SPI</span><div class="skill-bar"><div class="skill-fill" style="--w:65%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">STM32F4</span><div class="skill-bar"><div class="skill-fill" style="--w:60%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">PID Control</span><div class="skill-bar"><div class="skill-fill" style="--w:65%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">A* Path Planning</span><div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Linux (Ubuntu)</span><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div></div>
+    <div class="archive rv">
+      <a class="arc" href="https://github.com/eliftb/SahiOtonom2" target="_blank" rel="noopener">
+        <span class="arc-name">SahiOtonom2</span>
+        <span class="arc-desc">Robotaksi autonomous stack — team repository</span>
+        <span class="arc-lang">Python</span>
+      </a>
+      <a class="arc" href="https://github.com/eliftb/EdgeVision" target="_blank" rel="noopener">
+        <span class="arc-name">EdgeVision</span>
+        <span class="arc-desc">Vision models on edge devices</span>
+        <span class="arc-lang">Python</span>
+      </a>
+      <a class="arc" href="https://github.com/eliftb/page-replacement-algorithms" target="_blank" rel="noopener">
+        <span class="arc-name">page-replacement-algorithms</span>
+        <span class="arc-desc">OS paging algorithms, from scratch</span>
+        <span class="arc-lang">C</span>
+      </a>
+      <a class="arc" href="https://github.com/eliftb/nodejs-prometheus-metrics" target="_blank" rel="noopener">
+        <span class="arc-name">nodejs-prometheus-metrics</span>
+        <span class="arc-desc">Service instrumentation and metrics export</span>
+        <span class="arc-lang">JavaScript</span>
+      </a>
+      <a class="arc" href="https://github.com/eliftb/kebab-website" target="_blank" rel="noopener">
+        <span class="arc-name">kebab-website</span>
+        <span class="arc-desc">Restaurant site, designed and shipped</span>
+        <span class="arc-lang">HTML</span>
+      </a>
+      <a class="arc" href="https://github.com/eliftb?tab=repositories" target="_blank" rel="noopener">
+        <span class="arc-name">All repositories</span>
+        <span class="arc-desc">Everything else on GitHub</span>
+        <span class="arc-lang">↗</span>
+      </a>
     </div>
   </div>
 </section>
 
-<hr class="pixel-divider">
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="idx">03</span>
+      <h2>Stack</h2>
+      <span class="note">Things I have shipped with</span>
+    </div>
 
-<!-- CONTACT -->
-<div class="contact-section" id="contact">
-  <div class="section-label" style="text-align:center">// INSERT COIN TO CONTINUE</div>
-  <h2 class="section-title" style="text-align:center; margin-bottom:8px">LET'S <span>BUILD</span></h2>
-  <p style="color:var(--muted); font-size:12px; max-width:500px; margin:0 auto;">
-    Open for internships, collabs, and anything sufficiently interesting.<br>
-    Response time: faster than a ROS2 topic callback.
-  </p>
-  <div class="contact-links">
-    <a class="contact-link" href="mailto:eliftabala63@gmail.com">✉ EMAIL</a>
-    <a class="contact-link" href="https://github.com/eliftb" target="_blank">⌥ GITHUB</a>
-    <a class="contact-link" href="https://linkedin.com/in/elifnur-tabala" target="_blank">↗ LINKEDIN</a>
-    <a class="contact-link" href="https://elifnurtabala.dev" target="_blank">← MAIN SITE</a>
+    <div class="stack rv">
+      <div class="stack-cell">
+        <h3>Robotics &amp; real-time</h3>
+        <ul>
+          <li>ROS2 Humble</li><li>Gazebo</li><li>LiDAR / point clouds</li><li>VLP-16</li><li>ZED SDK</li><li>Sensor fusion</li><li>Obstacle avoidance</li><li>A* planning</li><li>PID control</li>
+        </ul>
+      </div>
+      <div class="stack-cell">
+        <h3>AI &amp; embedded ML</h3>
+        <ul>
+          <li>Python</li><li>Keras</li><li>TensorFlow</li><li>OpenCV</li><li>NumPy</li><li>SciPy</li><li>CNNs</li><li>FFT / signal processing</li><li>Model quantization</li><li>Latency budgeting</li>
+        </ul>
+      </div>
+      <div class="stack-cell">
+        <h3>Backend &amp; systems</h3>
+        <ul>
+          <li>Java Spring Boot 3.2</li><li>PostgreSQL</li><li>Docker</li><li>REST API design</li><li>Multi-tenant architecture</li><li>JWT</li><li>Transaction isolation</li><li>CI/CD</li>
+        </ul>
+      </div>
+      <div class="stack-cell">
+        <h3>Systems programming</h3>
+        <ul>
+          <li>C</li><li>C++</li><li>Ubuntu 22.04</li><li>STM32</li><li>Git</li><li>Data structures</li><li>Algorithms</li><li>Memory management</li><li>OS internals</li>
+        </ul>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-<footer>
-  © 2026 ELIFNUR TABALA &nbsp;·&nbsp; ALL RIGHTS RESERVED &nbsp;·&nbsp; MADE WITH ♥ AND CAFFEINE
-</footer>
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="idx">04</span>
+      <h2>Background</h2>
+      <span class="note">Education &amp; languages</span>
+    </div>
+
+    <div class="two">
+      <div class="rv">
+        <p class="edu-inst">Tekirdağ Namık Kemal University</p>
+        <p class="edu-meta">B.Sc. Computer Engineering <span>· expected 2027</span></p>
+        <p class="gpa"><b>3.32</b><i>GPA / 4.00</i></p>
+        <p class="course"><b>Relevant coursework</b>Data Structures &amp; Algorithms · Operating Systems · Databases · Artificial Intelligence · Computer Networks · Software Development · Mobile Communications</p>
+      </div>
+
+      <div class="rv">
+        <p class="label">Languages</p>
+        <div class="langs">
+          <div class="lang">
+            <span class="lang-n">Turkish</span>
+            <span class="lang-lvl">Native</span>
+            <span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+          </div>
+          <div class="lang">
+            <span class="lang-n">English</span>
+            <span class="lang-lvl">Fluent</span>
+            <span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+          </div>
+          <div class="lang">
+            <span class="lang-n">Japanese</span>
+            <span class="lang-lvl">JLPT N3</span>
+            <span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          </div>
+          <div class="lang">
+            <span class="lang-n">Korean</span>
+            <span class="lang-lvl">Intermediate</span>
+            <span class="bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          </div>
+          <div class="lang">
+            <span class="lang-n">German</span>
+            <span class="lang-lvl">A2</span>
+            <span class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 class="cta-line rv">Looking for a perception<br><span>or embedded ML team</span><br>for Feb 2027.</h2>
+    <p class="cta-sub rv">Six months, full-time, with the university internship agreement already in hand. If you are building something that has to understand the physical world fast enough to act on it, I would like to work on it.</p>
+    <div class="links rv">
+      <a class="primary" href="mailto:eliftabala63@gmail.com">eliftabala63@gmail.com <span class="ar" aria-hidden="true">→</span></a>
+      <a href="https://github.com/eliftb" target="_blank" rel="noopener">GitHub <span class="ar" aria-hidden="true">↗</span></a>
+      <a href="https://linkedin.com/in/elifnurtabala" target="_blank" rel="noopener">LinkedIn <span class="ar" aria-hidden="true">↗</span></a>
+      <a href="./Elifnur_Tabala_CV.pdf" target="_blank" rel="noopener">Résumé (PDF) <span class="ar" aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+  <div class="wrap">
+    <footer>
+      <span class="label">Elifnur Tabala · Istanbul, Turkey</span>
+      <span class="label">Built from scratch · no framework, no dependencies</span>
+    </footer>
+  </div>
+</section>
 
 <script>
-  // Toggle tech details
-  function toggleDetails(btn) {
-    const details = btn.nextElementSibling;
-    const isOpen = details.classList.contains('open');
-    details.classList.toggle('open', !isOpen);
-    btn.textContent = isOpen ? '▶ TECH DETAILS' : '▼ TECH DETAILS';
+(function(){
+  "use strict";
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------- scroll reveal ---------------- */
+  var rvs = document.querySelectorAll(".rv");
+  if (!("IntersectionObserver" in window) || reduce) {
+    for (var i = 0; i < rvs.length; i++) rvs[i].classList.add("in");
+  } else {
+    var rvObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add("in"); rvObs.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    for (var j = 0; j < rvs.length; j++) rvObs.observe(rvs[j]);
   }
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+  /* ---------------- nav + rail telemetry ---------------- */
+  var sections = ["top","work","projects","stack","about","contact"];
+  var navLinks = document.querySelectorAll(".nav-links a[href^='#']");
+  var trackEl = document.getElementById("r-track");
+  var rangeEl = document.getElementById("r-range");
+  var progEl  = document.getElementById("r-prog");
 
-  // Skill bar animation on hover (also trigger on scroll-visible)
-  const skillBlocks = document.querySelectorAll('.skill-block');
-  const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.skill-fill').forEach(fill => {
-          fill.style.width = fill.style.getPropertyValue('--w') ||
-            getComputedStyle(fill).getPropertyValue('--w');
-        });
-      }
+  function setActive(id){
+    navLinks.forEach(function(a){
+      a.classList.toggle("active", a.getAttribute("href") === "#" + id && !a.classList.contains("nav-cta"));
     });
-  }, { threshold: 0.3 });
-  skillBlocks.forEach(b => skillObserver.observe(b));
+    if (trackEl) trackEl.textContent = (id === "top" ? "HERO" : id).toUpperCase();
+  }
+
+  if ("IntersectionObserver" in window) {
+    var secObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    sections.forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) secObs.observe(el);
+    });
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      if (rangeEl) rangeEl.textContent = String(Math.round(p * 240)).padStart(3, "0") + " m";
+      if (progEl) progEl.style.height = (p * 100).toFixed(1) + "%";
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------------- point cloud ---------------- */
+  var cvs = document.getElementById("cloud");
+  if (!cvs || !cvs.getContext) return;
+  var ctx = cvs.getContext("2d");
+  var W = 0, H = 0, DPR = 1;
+
+  function resize(){
+    DPR = Math.min(2, window.devicePixelRatio || 1);
+    var r = cvs.getBoundingClientRect();
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    cvs.width = Math.round(W * DPR); cvs.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  /* scene: x right, y forward, z up (metres) */
+  var pts = [];
+  function rnd(a, b){ return a + Math.random() * (b - a); }
+
+  // road surface, denser near the sensor
+  for (var g = 0; g < 1150; g++){
+    var gy = 1.5 + Math.pow(Math.random(), 0.55) * 42;
+    var gx = rnd(-13, 13);
+    pts.push({ x: gx, y: gy, z: -0.022 * Math.abs(gx) + rnd(-0.04, 0.04), lit: 0, base: 0.10 });
+  }
+
+  // dashed lane markings — the thing the YOLOPv2 module looks for
+  for (var ly = 2; ly < 44; ly += 0.34){
+    if ((ly % 4.4) > 2.6) continue;
+    pts.push({ x: -1.92 + rnd(-0.05, 0.05), y: ly, z: rnd(-0.01, 0.02), lit: 0, base: 0.46 });
+    pts.push({ x:  1.92 + rnd(-0.05, 0.05), y: ly, z: rnd(-0.01, 0.02), lit: 0, base: 0.46 });
+  }
+  // solid shoulder lines
+  for (var sy = 1.5; sy < 44; sy += 0.5){
+    pts.push({ x: -5.6, y: sy, z: 0, lit: 0, base: 0.24 });
+    pts.push({ x:  5.6, y: sy, z: 0, lit: 0, base: 0.24 });
+  }
+
+  var objs = [
+    { x: -3.5, y: 15.0, w: 1.8, d: 4.3, h: 1.52, label: "VEHICLE" },
+    { x:  2.7, y: 24.0, w: 1.8, d: 4.4, h: 1.58, label: "VEHICLE" },
+    { x:  4.6, y:  9.6, w: 0.62, d: 0.5, h: 1.74, label: "PEDESTRIAN" },
+    { x: -6.6, y: 32.0, w: 2.3, d: 6.0, h: 2.70, label: "TRUCK" }
+  ];
+
+  objs.forEach(function(o){
+    o.lock = 0;
+    var n = Math.round(150 * Math.min(1.6, (o.w * o.h)));
+    for (var k = 0; k < n + 90; k++){
+      // sample the shell of the box so it reads as a returned surface
+      var face = Math.floor(Math.random() * 5);
+      var px, py, pz;
+      if (face === 0){ px = o.x - o.w / 2; py = o.y + rnd(-o.d / 2, o.d / 2); pz = rnd(0, o.h); }
+      else if (face === 1){ px = o.x + o.w / 2; py = o.y + rnd(-o.d / 2, o.d / 2); pz = rnd(0, o.h); }
+      else if (face === 2){ px = o.x + rnd(-o.w / 2, o.w / 2); py = o.y - o.d / 2; pz = rnd(0, o.h); }
+      else if (face === 3){ px = o.x + rnd(-o.w / 2, o.w / 2); py = o.y + o.d / 2; pz = rnd(0, o.h); }
+      else { px = o.x + rnd(-o.w / 2, o.w / 2); py = o.y + rnd(-o.d / 2, o.d / 2); pz = o.h; }
+      pts.push({ x: px, y: py, z: pz, lit: 0, base: 0.34 });
+    }
+  });
+
+  /* intensity colormap: teal (low return) -> amber (high return) */
+  var LUT = [];
+  for (var c = 0; c < 26; c++){
+    var v = c / 25;
+    var r = Math.round(53 + (255 - 53) * v);
+    var gc = Math.round(201 + (162 - 201) * v);
+    var b = Math.round(194 + (58 - 194) * v);
+    LUT.push("rgba(" + r + "," + gc + "," + b + "," + (0.13 + 0.82 * v).toFixed(3) + ")");
+  }
+
+  var camY = -7.2, camZ = 2.35;
+  var lastT = 0, fps = 0, fpsAcc = 0, fpsN = 0;
+  var fpsEl = document.getElementById("r-fps");
+  var running = false, rafId = 0;
+
+  function frame(now){
+    var t = now / 1000;
+    var dt = lastT ? Math.min(0.05, t - lastT) : 0.016;
+    lastT = t;
+
+    fpsAcc += 1 / Math.max(dt, 0.0001); fpsN++;
+    if (fpsN >= 20){
+      fps = fpsAcc / fpsN; fpsAcc = 0; fpsN = 0;
+      if (fpsEl) fpsEl.textContent = Math.round(fps) + " fps";
+    }
+
+    draw(t, dt);
+    if (running) rafId = requestAnimationFrame(frame);
+  }
+
+  function draw(t, dt){
+    var yaw = Math.sin(t * 0.13) * 0.125;
+    var cy = Math.cos(yaw), sy2 = Math.sin(yaw);
+    var f = H * 1.12;
+    var horizon = H * 0.60;
+    var sweepAz = Math.sin(t * 0.52) * 1.22;
+    var decay = Math.pow(0.12, dt);
+
+    ctx.clearRect(0, 0, W, H);
+
+    for (var i = 0; i < pts.length; i++){
+      var p = pts[i];
+      var ox = p.x, oy = p.y - 16;
+      var rx = ox * cy - oy * sy2;
+      var ry = ox * sy2 + oy * cy + 16;
+      var dy = ry - camY;
+      if (dy < 0.8) { p.lit *= decay; continue; }
+
+      var az = Math.atan2(rx, dy);
+      if (Math.abs(az - sweepAz) < 0.05) p.lit = 1;
+      else p.lit *= decay;
+
+      var sx = W * 0.5 + f * rx / dy;
+      if (sx < -20 || sx > W + 20) continue;
+      var sYp = horizon - f * (p.z - camZ) / dy;
+      if (sYp < -20 || sYp > H + 20) continue;
+
+      var depth = 1 - Math.min(0.88, Math.max(0, (dy - 5) / 48));
+      var v = Math.min(1, p.base + p.lit * 0.95) * depth;
+      var idx = (v * 25) | 0;
+      if (idx < 1) continue;
+
+      ctx.fillStyle = LUT[idx];
+      var s = p.lit > 0.35 ? 2.2 : 1.35;
+      ctx.fillRect(sx, sYp, s, s);
+    }
+
+    /* detection boxes — projected from the 3D clusters, acquired as the sweep passes */
+    ctx.lineWidth = 1;
+    ctx.font = "10px ui-monospace, Consolas, monospace";
+
+    for (var o = 0; o < objs.length; o++){
+      var ob = objs[o];
+      var minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9, ok = true, azSum = 0;
+
+      for (var cI = 0; cI < 8; cI++){
+        var bx = ob.x + ((cI & 1) ? ob.w / 2 : -ob.w / 2);
+        var by = ob.y + ((cI & 2) ? ob.d / 2 : -ob.d / 2);
+        var bz = (cI & 4) ? ob.h : 0;
+        var ox2 = bx, oy2 = by - 16;
+        var rx2 = ox2 * cy - oy2 * sy2;
+        var ry2 = ox2 * sy2 + oy2 * cy + 16;
+        var dy2 = ry2 - camY;
+        if (dy2 < 1.2) { ok = false; break; }
+        azSum += Math.atan2(rx2, dy2);
+        var px2 = W * 0.5 + f * rx2 / dy2;
+        var py2 = horizon - f * (bz - camZ) / dy2;
+        if (px2 < minX) minX = px2;
+        if (px2 > maxX) maxX = px2;
+        if (py2 < minY) minY = py2;
+        if (py2 > maxY) maxY = py2;
+      }
+      if (!ok) { ob.lock *= decay; continue; }
+
+      if (Math.abs(azSum / 8 - sweepAz) < 0.16) ob.lock = 1;
+      else ob.lock *= Math.pow(0.55, dt);
+
+      if (ob.lock < 0.03) continue;
+      if (maxX < 0 || minX > W) continue;
+
+      var a = 0.2 + 0.8 * ob.lock;
+      ctx.strokeStyle = "rgba(255,162,58," + a.toFixed(3) + ")";
+      var bw = maxX - minX, bh = maxY - minY;
+      var arm = Math.max(5, Math.min(16, bw * 0.28));
+
+      // corner brackets
+      ctx.beginPath();
+      ctx.moveTo(minX, minY + arm); ctx.lineTo(minX, minY); ctx.lineTo(minX + arm, minY);
+      ctx.moveTo(maxX - arm, minY); ctx.lineTo(maxX, minY); ctx.lineTo(maxX, minY + arm);
+      ctx.moveTo(minX, maxY - arm); ctx.lineTo(minX, maxY); ctx.lineTo(minX + arm, maxY);
+      ctx.moveTo(maxX - arm, maxY); ctx.lineTo(maxX, maxY); ctx.lineTo(maxX, maxY - arm);
+      ctx.stroke();
+
+      if (bw > 26 && ob.lock > 0.25){
+        var txt = ob.label;
+        var tw = ctx.measureText(txt).width;
+        ctx.fillStyle = "rgba(255,162,58," + (a * 0.9).toFixed(3) + ")";
+        ctx.fillRect(minX, minY - 14, tw + 10, 13);
+        ctx.fillStyle = "#0b0f16";
+        ctx.fillText(txt, minX + 5, minY - 4);
+      }
+    }
+  }
+
+  resize();
+  window.addEventListener("resize", function(){ resize(); if (!running) draw(0, 0.016); }, { passive: true });
+
+  if (reduce){
+    // single static frame: everything at baseline intensity, all boxes acquired
+    for (var q = 0; q < pts.length; q++) pts[q].lit = 0.18;
+    for (var q2 = 0; q2 < objs.length; q2++) objs[q2].lock = 1;
+    draw(0, 0.016);
+    if (fpsEl) fpsEl.textContent = "static";
+  } else {
+    var hero = document.getElementById("top");
+    var start = function(){ if (!running){ running = true; lastT = 0; rafId = requestAnimationFrame(frame); } };
+    var stop = function(){ running = false; cancelAnimationFrame(rafId); };
+    if ("IntersectionObserver" in window){
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ e.isIntersecting ? start() : stop(); });
+      }, { threshold: 0 }).observe(hero);
+    }
+    document.addEventListener("visibilitychange", function(){
+      document.hidden ? stop() : start();
+    });
+    start();
+  }
+})();
 </script>
 </body>
 </html>
