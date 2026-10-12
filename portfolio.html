@@ -735,17 +735,17 @@ footer{
       <article class="det rv">
         <div class="det-top">
           <span class="chip">NLP</span>
-          <span class="chip live">Shipped</span>
+          <span class="chip">Research</span>
           <span class="chip metric">90.2% accuracy</span>
         </div>
         <h3>Turkish Emotion Classifier</h3>
-        <p class="sub">7-class NLP system with research validation</p>
-        <p>A production Turkish emotion model trained on a corpus I annotated myself — and an honest account of the one class the data cannot support.</p>
+        <p class="sub">7-class NLP system with a measured negative result</p>
+        <p>A local Turkish emotion classifier, and an honest account of the one class the data cannot support.</p>
         <ul>
-          <li>Curated <b>37,000</b> Turkish text records through a purpose-built annotation interface; TF-IDF plus logistic regression, running locally with <b>no API dependency</b>.</li>
-          <li><b>90.2%</b> accuracy on a <b>7,135</b>-record test set, validated across <b>500</b> user sessions.</li>
+          <li>Assembled a 7-class training set from three public Turkish datasets plus my own hand labels, using a purpose-built annotation interface; TF-IDF plus logistic regression, running locally with <b>no API dependency</b>.</li>
+          <li><b>90.2%</b> accuracy on a stratified, held-out <b>7,135</b>-record test set.</li>
           <li>Published a Cohen's kappa inter-annotator analysis quantifying the data ceiling for the rare class — contempt, <b>13</b> samples, <b>0.167</b> F1 — and documented it as a data constraint, not a model one.</li>
-          <li>Shipped with a Flask labeling UI carrying live agreement metrics, plus a Chrome extension for real use.</li>
+          <li>Flask labeling UI with live agreement metrics, plus a Chrome extension that scores page text with the local model.</li>
         </ul>
         <div class="tags"><span>Python</span><span>scikit-learn</span><span>Flask</span><span>Chrome Extension</span><span>Annotation</span></div>
         <a class="det-link" href="https://github.com/eliftb/tr-emotion-class" target="_blank" rel="noopener">github.com/eliftb/tr-emotion-class <span aria-hidden="true">↗</span></a>
@@ -754,17 +754,17 @@ footer{
       <article class="det rv">
         <div class="det-top">
           <span class="chip">Backend</span>
-          <span class="chip live">Shipped</span>
-          <span class="chip metric">99.8% coverage</span>
+          <span class="chip">Course project</span>
+          <span class="chip metric">22 tests</span>
         </div>
         <h3>Hasad</h3>
         <p class="sub">Digital marketplace backend, producer to consumer</p>
-        <p>A multi-tenant Spring Boot marketplace built the way a system that handles other people's money has to be built — tested, migrated, and containerized.</p>
+        <p>A full-stack Spring Boot and Next.js marketplace connecting local producers with consumers, built for a software engineering course: layered REST API, role-based access, migrations and Docker.</p>
         <ul>
-          <li>JWT authentication with four-tier role-based access control; Flyway migrations for zero-downtime deployments.</li>
-          <li>Normalized PostgreSQL schema with query optimization for tenant data isolation, under <b>serializable</b> transaction isolation.</li>
-          <li><b>679</b> unit and integration tests at <b>99.8%</b> coverage, running automatically in CI/CD.</li>
-          <li>Dockerized with health checks and graceful shutdown for production orchestration.</li>
+          <li>JWT authentication with four roles (consumer, producer, admin, super admin); orders, cart, reviews, producer approval and an admin panel.</li>
+          <li>PostgreSQL schema managed with Flyway migrations; Swagger UI for the API.</li>
+          <li>JUnit and Mockito unit and integration tests for the auth, order, product and producer services (<b>22</b> tests).</li>
+          <li>Dockerized backend and database with a PostgreSQL health check, via docker-compose.</li>
         </ul>
         <div class="tags"><span>Java 17</span><span>Spring Boot 3.2</span><span>PostgreSQL</span><span>Flyway</span><span>Docker</span><span>Spring Security</span></div>
         <a class="det-link" href="https://github.com/eliftb/digital-marketplace-hasad" target="_blank" rel="noopener">github.com/eliftb/digital-marketplace-hasad <span aria-hidden="true">↗</span></a>
@@ -796,9 +796,14 @@ footer{
         <span class="arc-desc">Robotaksi autonomous stack — team repository</span>
         <span class="arc-lang">Python</span>
       </a>
-      <a class="arc" href="https://github.com/eliftb/EdgeVision" target="_blank" rel="noopener">
-        <span class="arc-name">EdgeVision</span>
-        <span class="arc-desc">Vision models on edge devices</span>
+      <a class="arc" href="https://github.com/eliftb/tr-payout-reconciliation" target="_blank" rel="noopener">
+        <span class="arc-name">tr-payout-reconciliation</span>
+        <span class="arc-desc">Delivery-platform payout audit for restaurants, with tests and CI</span>
+        <span class="arc-lang">Python</span>
+      </a>
+      <a class="arc" href="https://github.com/eliftb/video-action-recognition" target="_blank" rel="noopener">
+        <span class="arc-name">video-action-recognition</span>
+        <span class="arc-desc">SlowFast, VideoMAE, TimeSformer and I3D compared on speed and memory</span>
         <span class="arc-lang">Python</span>
       </a>
       <a class="arc" href="https://github.com/eliftb/page-replacement-algorithms" target="_blank" rel="noopener">
@@ -808,7 +813,7 @@ footer{
       </a>
       <a class="arc" href="https://github.com/eliftb/nodejs-prometheus-metrics" target="_blank" rel="noopener">
         <span class="arc-name">nodejs-prometheus-metrics</span>
-        <span class="arc-desc">Service instrumentation and metrics export</span>
+        <span class="arc-desc">Express and prom-client service metrics endpoint</span>
         <span class="arc-lang">JavaScript</span>
       </a>
       <a class="arc" href="https://github.com/eliftb/kebab-website" target="_blank" rel="noopener">
@@ -843,13 +848,13 @@ footer{
       <div class="stack-cell">
         <h3>AI &amp; embedded ML</h3>
         <ul>
-          <li>Python</li><li>Keras</li><li>TensorFlow</li><li>OpenCV</li><li>NumPy</li><li>SciPy</li><li>CNNs</li><li>FFT / signal processing</li><li>Model quantization</li><li>Latency budgeting</li>
+          <li>Python</li><li>Keras</li><li>TensorFlow</li><li>OpenCV</li><li>NumPy</li><li>SciPy</li><li>CNNs</li><li>FFT / signal processing</li><li>Latency budgeting</li>
         </ul>
       </div>
       <div class="stack-cell">
         <h3>Backend &amp; systems</h3>
         <ul>
-          <li>Java Spring Boot 3.2</li><li>PostgreSQL</li><li>Docker</li><li>REST API design</li><li>Multi-tenant architecture</li><li>JWT</li><li>Transaction isolation</li><li>CI/CD</li>
+          <li>Java Spring Boot 3.2</li><li>PostgreSQL</li><li>Docker</li><li>REST API design</li><li>JWT</li><li>Flyway migrations</li><li>JUnit / Mockito</li><li>GitHub Actions CI</li>
         </ul>
       </div>
       <div class="stack-cell">
