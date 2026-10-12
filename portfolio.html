@@ -6,12 +6,12 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#080b11">
 <title>Elifnur Tabala — Perception Engineer</title>
-<meta name="description" content="Elifnur Tabala — robotics perception engineer. LiDAR and stereo-camera sensor fusion on ROS2, embedded ML, and real-time computer vision. TEKNOFEST Robotaksi 2026 finalist. Available for a six-month internship, February to August 2027.">
+<meta name="description" content="Elifnur Tabala — robotics perception engineer. LiDAR obstacle detection and camera-based lane detection on ROS2, embedded ML, and real-time computer vision. TEKNOFEST Robotaksi 2026 finalist. Available for a six-month internship, February to August 2027.">
 <meta name="author" content="Elifnur Tabala">
 <link rel="canonical" href="https://elifnurtabala.dev/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Elifnur Tabala — Perception Engineer">
-<meta property="og:description" content="LiDAR + stereo-camera sensor fusion on ROS2, embedded ML, real-time CV. TEKNOFEST Robotaksi 2026 finalist. Open for a six-month internship, Feb–Aug 2027.">
+<meta property="og:description" content="LiDAR obstacle detection and camera lane detection on ROS2, embedded ML, real-time CV. TEKNOFEST Robotaksi 2026 finalist. Open for a six-month internship, Feb–Aug 2027.">
 <meta property="og:url" content="https://elifnurtabala.dev/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23080b11'/><circle cx='9' cy='20' r='2' fill='%2335c9c2'/><circle cx='16' cy='14' r='2.4' fill='%23ffa23a'/><circle cx='23' cy='21' r='2' fill='%2335c9c2'/><path d='M5 27h22' stroke='%231c2735' stroke-width='1.5'/></svg>">
@@ -629,12 +629,12 @@ footer{
 
   <div class="hero-inner wrap">
     <div class="hero-eyebrow rv">
-      <span>Sensor Fusion</span><span>Embedded ML</span><span>ROS2</span><span>Istanbul, TR</span>
+      <span>Perception</span><span>Embedded ML</span><span>ROS2</span><span>Istanbul, TR</span>
     </div>
 
     <h1 class="hero-name rv"><em>Elifnur</em><em>Tabala</em></h1>
 
-    <p class="hero-lede rv">I build the part of an autonomous system that decides <b>what it is looking at</b> — LiDAR and stereo-camera fusion running on the vehicle, in real time, inside a latency budget. Fourth-year Computer Engineering student and TEKNOFEST Robotaksi 2026 finalist.</p>
+    <p class="hero-lede rv">I build the part of an autonomous system that decides <b>what it is looking at</b> — LiDAR obstacle detection and camera-based lane and sign detection running on the vehicle, in real time. Fourth-year Computer Engineering student and TEKNOFEST Robotaksi 2026 finalist.</p>
 
     <div class="readout rv">
       <div>
@@ -644,14 +644,6 @@ footer{
       <div>
         <span class="num">30<small> fps</small></span>
         <span class="label cap">Lane detection, on-vehicle</span>
-      </div>
-      <div>
-        <span class="num">&lt;100<small> ms</small></span>
-        <span class="label cap">Perception latency</span>
-      </div>
-      <div>
-        <span class="num">94<small>%</small></span>
-        <span class="label cap">YOLOPv2 precision</span>
       </div>
     </div>
   </div>
@@ -680,10 +672,10 @@ footer{
           <h3 class="log-role">Software Engineer — Robotics Perception</h3>
           <p class="log-org">Sahi Otonom Takımı <span>· TEKNOFEST Robotaksi 2026 · Finalist</span></p>
           <ul class="bullets">
-            <li>Led the perception pipeline for a finalist autonomous vehicle, scoring <b>87/100</b> on the Constrained Test Route qualification at national level.</li>
-            <li>Fused a <b>VLP-16</b> LiDAR with a <b>ZED 2i</b> stereo camera over ROS2 Humble for real-time obstacle detection and localization.</li>
-            <li>Shipped a YOLOPv2 lane-detection module at <b>94%</b> precision, <b>30 FPS</b>, sub-<b>100 ms</b> latency, publishing live markers into the autonomous control stack via OpenCV.</li>
-            <li>Validated the fusion pipeline across <b>10</b> Gazebo scenarios at a <b>100%</b> pass rate; integrated A* path planning with PID control on Ubuntu 22.04.</li>
+            <li>Worked on the perception and control software of a finalist autonomous vehicle, scoring <b>87/100</b> on the Constrained Test Route qualification at national level.</li>
+            <li>Built ROS2 Humble nodes around a <b>ZED 2i</b> camera and a 2D LiDAR: camera lane and traffic-sign detection, LiDAR obstacle detection, and a decision state machine that combines them.</li>
+            <li>Lane-detection node running at about <b>30 FPS</b> on the vehicle, publishing lateral deviation into the control stack.</li>
+            <li>Time-based PID steering control and hardware-free tests for the LiDAR corridor filter, slalom and lane geometry, on Ubuntu 22.04.</li>
           </ul>
         </div>
       </article>
@@ -842,7 +834,7 @@ footer{
       <div class="stack-cell">
         <h3>Robotics &amp; real-time</h3>
         <ul>
-          <li>ROS2 Humble</li><li>Gazebo</li><li>LiDAR / point clouds</li><li>VLP-16</li><li>ZED SDK</li><li>Sensor fusion</li><li>Obstacle avoidance</li><li>A* planning</li><li>PID control</li>
+          <li>ROS2 Humble</li><li>Gazebo</li><li>2D LiDAR (RPLIDAR)</li><li>ZED SDK</li><li>Obstacle detection</li><li>PID control</li>
         </ul>
       </div>
       <div class="stack-cell">
