@@ -700,7 +700,7 @@ footer{
     <div class="sec-head rv">
       <span class="idx">02</span>
       <h2>Projects</h2>
-      <span class="note">Four tracked · badges are measured</span>
+      <span class="note">Six tracked · badges are measured</span>
     </div>
 
     <div class="grid">
@@ -722,6 +722,43 @@ footer{
         </ul>
         <div class="tags"><span>Python</span><span>Keras</span><span>NumPy</span><span>SciPy</span><span>STM32</span><span>Signal processing</span></div>
         <a class="det-link" href="https://github.com/eliftb/SubScan" target="_blank" rel="noopener">github.com/eliftb/SubScan <span aria-hidden="true">↗</span></a>
+      </article>
+
+      <article class="det rv">
+        <div class="det-top">
+          <span class="chip">Computer Vision</span>
+          <span class="chip">Benchmark</span>
+          <span class="chip metric">4 models</span>
+        </div>
+        <h3>Video Action Recognition</h3>
+        <p class="sub">SlowFast vs VideoMAE vs TimeSformer vs I3D</p>
+        <p>Runs one video through four pretrained Kinetics-400 models and compares what each predicts, how confident it is, how fast it runs and how much memory it needs.</p>
+        <ul>
+          <li>Measured on an RTX 4060 laptop GPU: I3D takes <b>22.7 ms</b> per clip end to end, VideoMAE <b>102.3 ms</b>, about 4&times; slower for the highest published accuracy.</li>
+          <li>Published accuracy figures are labelled as not measured here; <code>evaluate.py</code> measures top-1 and top-5 on your own labelled videos.</li>
+          <li>Modular package (decoding, preprocessing, model wrappers, benchmark, visualisation) with tests that run without model weights. Outputs a summary figure and an annotated video.</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>PyTorch</span><span>Hugging Face</span><span>PyTorchVideo</span><span>OpenCV</span></div>
+        <a class="det-link" href="https://github.com/eliftb/video-action-recognition" target="_blank" rel="noopener">github.com/eliftb/video-action-recognition <span aria-hidden="true">↗</span></a>
+      </article>
+
+      <article class="det rv">
+        <div class="det-top">
+          <span class="chip">Systems</span>
+          <span class="chip">Sample data</span>
+          <span class="chip metric">30/30 planted errors</span>
+        </div>
+        <h3>Payout Reconciliation</h3>
+        <p class="sub">Payout audit for restaurants on Turkish delivery platforms</p>
+        <p>Computes what a delivery platform should have paid from the restaurant's own POS records and contract terms, compares it with the payout statement, and attributes every missing lira to exactly one cause.</p>
+        <ul>
+          <li>Date-ranged commission rules (rate, base, fixed fee, processing fee, VAT, delivery) with a line-by-line breakdown for every order.</li>
+          <li><b>12</b> discrepancy types; each underpaid amount gets a single cause, so the dispute total is never double-counted.</li>
+          <li>On the generated benchmark month: all <b>30</b> planted errors found, <b>0</b> false positives, a 3,599.95 TL shortfall (5.4%) fully explained. Not yet run on a real platform statement.</li>
+          <li>Python standard library and SQLite, runs locally; unit, regression and HTTP tests with GitHub Actions CI.</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>SQLite</span><span>openpyxl</span><span>GitHub Actions</span><span>Testing</span></div>
+        <a class="det-link" href="https://github.com/eliftb/tr-payout-reconciliation" target="_blank" rel="noopener">github.com/eliftb/tr-payout-reconciliation <span aria-hidden="true">↗</span></a>
       </article>
 
       <article class="det rv">
@@ -786,16 +823,6 @@ footer{
       <a class="arc" href="https://github.com/eliftb/SahiOtonom2" target="_blank" rel="noopener">
         <span class="arc-name">SahiOtonom2</span>
         <span class="arc-desc">Robotaksi autonomous stack — team repository</span>
-        <span class="arc-lang">Python</span>
-      </a>
-      <a class="arc" href="https://github.com/eliftb/tr-payout-reconciliation" target="_blank" rel="noopener">
-        <span class="arc-name">tr-payout-reconciliation</span>
-        <span class="arc-desc">Delivery-platform payout audit for restaurants, with tests and CI</span>
-        <span class="arc-lang">Python</span>
-      </a>
-      <a class="arc" href="https://github.com/eliftb/video-action-recognition" target="_blank" rel="noopener">
-        <span class="arc-name">video-action-recognition</span>
-        <span class="arc-desc">SlowFast, VideoMAE, TimeSformer and I3D compared on speed and memory</span>
         <span class="arc-lang">Python</span>
       </a>
       <a class="arc" href="https://github.com/eliftb/page-replacement-algorithms" target="_blank" rel="noopener">
