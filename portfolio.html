@@ -8,12 +8,13 @@
 <title>Elifnur Tabala — Perception Engineer</title>
 <meta name="description" content="Elifnur Tabala — robotics perception engineer. LiDAR obstacle detection and camera-based lane detection on ROS2, embedded ML, and real-time computer vision. TEKNOFEST Robotaksi 2026 finalist. Available for a six-month internship, February to August 2027.">
 <meta name="author" content="Elifnur Tabala">
-<link rel="canonical" href="https://elifnurtabala.dev/">
+<link rel="canonical" href="https://elifnurtabala.dev/portfolio">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Elifnur Tabala — Perception Engineer">
 <meta property="og:description" content="LiDAR obstacle detection and camera lane detection on ROS2, embedded ML, real-time CV. TEKNOFEST Robotaksi 2026 finalist. Open for a six-month internship, Feb–Aug 2027.">
-<meta property="og:url" content="https://elifnurtabala.dev/">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://elifnurtabala.dev/portfolio">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Elifnur Tabala","url":"https://elifnurtabala.dev/portfolio","jobTitle":"Computer Engineering student","knowsAbout":["ROS2","Computer vision","LiDAR obstacle detection","Embedded machine learning","Spring Boot","Python"],"sameAs":["https://github.com/eliftb"]}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23080b11'/><circle cx='9' cy='20' r='2' fill='%2335c9c2'/><circle cx='16' cy='14' r='2.4' fill='%23ffa23a'/><circle cx='23' cy='21' r='2' fill='%2335c9c2'/><path d='M5 27h22' stroke='%231c2735' stroke-width='1.5'/></svg>">
 </head>
 <body>
@@ -712,13 +713,12 @@ footer{
           <span class="chip metric">6 classes</span>
         </div>
         <h3>SubScan</h3>
-        <p class="sub">Subsurface pest detection via sensor fusion</p>
-        <p>Detecting pests underground by listening to them: a seismic and acoustic signal pipeline that classifies six species from vibration signatures, sized to run on a microcontroller in a field.</p>
+        <p class="sub">Subsurface pest detection from seismic and acoustic signals</p>
+        <p>Detecting pests underground by listening to them: a seismic and acoustic signal pipeline meant to classify six pest types from vibration signatures on a microcontroller in the field. Currently at the synthetic-data stage.</p>
         <ul>
-          <li>End-to-end synthetic data pipeline in Python — FFT feature extraction, sliding time-window segmentation, <b>1D CNN</b> for time-series classification.</li>
-          <li>Hardware in integration: <b>STM32F411</b>, ADXL345 seismic accelerometer, acoustic sensor, DHT22 thermal.</li>
-          <li>Deployment strategy is post-training quantization with a sub-<b>100 ms</b> inference budget on constrained hardware.</li>
-          <li>Field validation against real subsurface data at agricultural test sites, <b>Oct 2026</b>.</li>
+          <li>Working synthetic-data pipeline in Python: FFT features (100 bins, 0–500 Hz) into a <b>1D CNN</b>, 6 classes. Class separation is artificial at this stage, so no accuracy figure is claimed.</li>
+          <li>Next: hardware integration (<b>STM32F411</b>, ADXL345 accelerometer, microphone) and field data collection in <b>Oct 2026</b>.</li>
+          <li>Planned: post-training quantization to fit a sub-<b>100 ms</b> inference budget on constrained hardware.</li>
         </ul>
         <div class="tags"><span>Python</span><span>Keras</span><span>NumPy</span><span>SciPy</span><span>STM32</span><span>Signal processing</span></div>
         <a class="det-link" href="https://github.com/eliftb/SubScan" target="_blank" rel="noopener">github.com/eliftb/SubScan <span aria-hidden="true">↗</span></a>
@@ -944,7 +944,6 @@ footer{
       <a class="primary" href="mailto:eliftabala63@gmail.com">eliftabala63@gmail.com <span class="ar" aria-hidden="true">→</span></a>
       <a href="https://github.com/eliftb" target="_blank" rel="noopener">GitHub <span class="ar" aria-hidden="true">↗</span></a>
       <a href="https://linkedin.com/in/elifnurtabala" target="_blank" rel="noopener">LinkedIn <span class="ar" aria-hidden="true">↗</span></a>
-      <a href="./Elifnur_Tabala_CV.pdf" target="_blank" rel="noopener">Résumé (PDF) <span class="ar" aria-hidden="true">↓</span></a>
     </div>
   </div>
   <div class="wrap">

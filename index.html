@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Elifnur Tabala — Portfolio</title>
+<meta name="description" content="Elifnur Tabala — computer engineering student building autonomous-vehicle software, backend systems and applied AI. Open for a six-month internship in 2027.">
+<meta name="theme-color" content="#5bb8ff">
+<link rel="canonical" href="https://elifnurtabala.dev/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Elifnur Tabala — Portfolio">
+<meta property="og:description" content="Autonomous-vehicle software, backend systems and applied AI. Open for a six-month internship in 2027.">
+<meta property="og:url" content="https://elifnurtabala.dev/">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DM+Sans:wght@300;400;600&display=swap');
@@ -17,6 +24,7 @@
   --cloud:#ffffff;--ground:#c8841a;--ground2:#a0660d;
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 body{background:var(--sky);color:var(--dark);font-family:'DM Sans',sans-serif;cursor:none;overflow-x:hidden;image-rendering:pixelated}
 
 /* CURSOR */
@@ -304,7 +312,7 @@ footer{background:var(--dark);color:var(--yellow);text-align:center;padding:1.5r
       <span class="pixel-label">// PLAYER PROFILE</span>
       <h2 class="pixel-title">ABOUT<br>ELIFNUR.</h2>
       <p>I'm a <strong>Computer Engineering student</strong> at Tekirdag Namik Kemal University, graduating 2027. Currently making an autonomous robotaxi not crash at <strong>Sahi Otonom</strong> for TEKNOFEST.</p>
-      <p>My world is where <strong>robotics meets software</strong> — Python that sees through cameras, Java that serves requests at scale, JavaScript that brings ideas to life. I love the craft.</p>
+      <p>My world is where <strong>robotics meets software</strong> — Python that sees through cameras, Java that serves requests, JavaScript that brings ideas to life. I love the craft.</p>
       <p>When I'm not at a keyboard I'm probably rewatching anime or practicing Japanese. Probably both.</p>
       <div class="lang-row">
         <span class="lpill">🇹🇷 TURKISH</span>
@@ -337,6 +345,22 @@ footer{background:var(--dark);color:var(--yellow);text-align:center;padding:1.5r
       </div>
     </div>
     <div class="proj-item">
+      <div class="proj-icon-box" style="background:var(--red)">🎬</div>
+      <div>
+        <div class="proj-name">VIDEO ACTION RECOGNITION</div>
+        <div class="proj-desc">One video, four pretrained models (SlowFast, VideoMAE, TimeSformer, I3D): predictions, speed and memory compared on a laptop GPU. Published accuracy figures are labelled as not measured here.</div>
+        <div class="proj-tags"><span class="ptag">PYTHON</span><span class="ptag">PYTORCH</span><span class="ptag">COMPUTER VISION</span></div>
+      </div>
+    </div>
+    <div class="proj-item">
+      <div class="proj-icon-box" style="background:var(--brick)">🧾</div>
+      <div>
+        <div class="proj-name">PAYOUT RECONCILIATION</div>
+        <div class="proj-desc">Audits what Turkish delivery platforms actually paid a restaurant against its POS records and contract rates, and pins each missing lira on one cause. 30 of 30 planted errors found on sample data; tests and CI included.</div>
+        <div class="proj-tags"><span class="ptag">PYTHON</span><span class="ptag">SQLITE</span><span class="ptag">TESTS + CI</span></div>
+      </div>
+    </div>
+    <div class="proj-item">
       <div class="proj-icon-box" style="background:var(--green)">📊</div>
       <div>
         <div class="proj-name">PROMETHEUS METRICS ENDPOINT</div>
@@ -348,7 +372,7 @@ footer{background:var(--dark);color:var(--yellow);text-align:center;padding:1.5r
       <div class="proj-icon-box" style="background:var(--yellow)">🖥️</div>
       <div>
         <div class="proj-name">PAGE REPLACEMENT SIMULATOR</div>
-        <div class="proj-desc">Implemented and benchmarked FIFO, LRU and Optimal in C. Real systems programming, not a framework tutorial.</div>
+        <div class="proj-desc">Implemented FIFO, LRU and Optimal in C and compared them by page-fault count. Real systems programming, not a framework tutorial.</div>
         <div class="proj-tags"><span class="ptag">C</span><span class="ptag">SYSTEMS</span><span class="ptag">OS</span></div>
       </div>
     </div>
